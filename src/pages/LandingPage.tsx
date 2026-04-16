@@ -11,8 +11,8 @@ export default function LandingPage() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border">
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 h-16">
-          <h1 className="text-xl font-extrabold tracking-tight">
-            <span className="text-gradient">BeyondOffer</span>
+          <h1 className="text-xl font-extrabold tracking-tight text-foreground">
+            Beyond<span className="text-gradient">Offer</span>
           </h1>
           <Button onClick={() => navigate('/onboarding')} size="sm" className="gradient-primary text-primary-foreground font-semibold rounded-full px-6">
             Get Started
@@ -23,8 +23,8 @@ export default function LandingPage() {
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-6">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-primary/10 blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-secondary/10 blur-3xl" />
+          <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-primary/8 blur-3xl" />
+          <div className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-secondary/8 blur-3xl" />
         </div>
         <div className="relative max-w-3xl mx-auto text-center">
           <motion.div
@@ -48,7 +48,7 @@ export default function LandingPage() {
               <Button
                 onClick={() => navigate('/onboarding')}
                 size="lg"
-                className="gradient-primary text-primary-foreground font-bold rounded-full px-8 h-12 text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-shadow"
+                className="gradient-primary text-primary-foreground font-bold rounded-full px-8 h-12 text-base glow-green hover:opacity-90 transition-opacity"
               >
                 Join the Community
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -57,7 +57,7 @@ export default function LandingPage() {
                 variant="outline"
                 size="lg"
                 onClick={() => navigate('/map')}
-                className="rounded-full px-8 h-12 text-base font-semibold border-border"
+                className="rounded-full px-8 h-12 text-base font-semibold border-border text-foreground hover:bg-muted"
               >
                 Explore the Map
               </Button>
@@ -72,7 +72,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { icon: MapPin, title: 'Community Map', desc: 'See intern pods at every office. Find who works nearby and explore hotspots other interns love.', color: 'bg-primary/10 text-primary' },
-              { icon: MessageCircle, title: 'Group Chats', desc: 'Auto-join chats for your city, company, and interests. Coordinate dinner, gym sessions, and weekend plans.', color: 'bg-secondary/10 text-secondary' },
+              { icon: MessageCircle, title: 'Group Chats', desc: 'Auto-join chats for your city, company, and interests. Coordinate dinner, gym sessions, and weekend plans.', color: 'bg-primary/10 text-primary' },
               { icon: Users, title: 'Sponsored Events', desc: 'Companies host mixers, game nights, and panels just for interns. RSVP and connect with talent.', color: 'bg-sponsored/10 text-sponsored' },
             ].map(({ icon: Icon, title, desc, color }, i) => (
               <motion.div
@@ -80,7 +80,7 @@ export default function LandingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 + i * 0.15 }}
-                className="relative p-6 rounded-2xl border border-border bg-card hover:shadow-lg transition-shadow"
+                className="relative p-6 rounded-2xl border border-border bg-card hover:border-primary/30 transition-colors"
               >
                 <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center mb-4`}>
                   <Icon className="w-6 h-6" />
