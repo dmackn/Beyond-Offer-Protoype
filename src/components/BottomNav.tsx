@@ -16,7 +16,7 @@ export default function BottomNav() {
     <nav className="fixed bottom-0 left-0 right-0 z-50 glass border-t border-border">
       <div className="flex items-center justify-around h-16 max-w-lg mx-auto">
         {tabs.map(({ icon: Icon, label, path }) => {
-          const active = location.pathname === path || (path === '/map' && location.pathname === '/');
+          const active = location.pathname === path;
           return (
             <button
               key={path}

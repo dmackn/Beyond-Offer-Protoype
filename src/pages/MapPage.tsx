@@ -29,47 +29,44 @@ export default function MapPage() {
   return (
     <AppLayout>
       <div className="relative h-[calc(100vh-5rem)] overflow-hidden">
-        {/* Map Background - placeholder for real map */}
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/30 to-muted/60">
-          {/* Simulated map grid */}
+        {/* Map Background */}
+        <div className="absolute inset-0 bg-background">
           <div className="absolute inset-0" style={{
             backgroundImage: `
-              linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px)
+              linear-gradient(hsla(145, 72%, 50%, 0.03) 1px, transparent 1px),
+              linear-gradient(90deg, hsla(145, 72%, 50%, 0.03) 1px, transparent 1px)
             `,
             backgroundSize: '60px 60px',
           }} />
-          {/* Simulated roads */}
-          <div className="absolute top-1/2 left-0 right-0 h-px bg-border" />
-          <div className="absolute top-0 bottom-0 left-1/2 w-px bg-border" />
-          <div className="absolute top-1/4 left-0 right-0 h-px bg-border/50" />
-          <div className="absolute top-3/4 left-0 right-0 h-px bg-border/50" />
-          <div className="absolute top-0 bottom-0 left-1/4 w-px bg-border/50" />
-          <div className="absolute top-0 bottom-0 left-3/4 w-px bg-border/50" />
+          <div className="absolute top-1/2 left-0 right-0 h-px bg-border/40" />
+          <div className="absolute top-0 bottom-0 left-1/2 w-px bg-border/40" />
+          <div className="absolute top-1/4 left-0 right-0 h-px bg-border/20" />
+          <div className="absolute top-3/4 left-0 right-0 h-px bg-border/20" />
+          <div className="absolute top-0 bottom-0 left-1/4 w-px bg-border/20" />
+          <div className="absolute top-0 bottom-0 left-3/4 w-px bg-border/20" />
         </div>
 
-        {/* Header: Search + Toggle */}
+        {/* Header */}
         <div className="absolute top-0 left-0 right-0 z-30 p-4 space-y-3">
           <div className="flex items-center gap-2">
-            <div className="flex-1 flex items-center gap-2 h-11 px-4 rounded-full glass border border-border shadow-sm">
+            <div className="flex-1 flex items-center gap-2 h-11 px-4 rounded-full glass border border-border">
               <Search className="w-4 h-4 text-muted-foreground" />
               <input
                 placeholder="Search by company, location, or interest..."
-                className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground text-foreground"
               />
             </div>
             {mode === 'explore' && (
               <button
                 onClick={() => setShowEventList(!showEventList)}
-                className="w-11 h-11 rounded-full glass border border-border shadow-sm flex items-center justify-center"
+                className="w-11 h-11 rounded-full glass border border-border flex items-center justify-center"
               >
                 <List className="w-4 h-4 text-muted-foreground" />
               </button>
             )}
           </div>
-          {/* Mode Toggle */}
           <div className="flex justify-center">
-            <div className="inline-flex items-center gap-1 p-1 rounded-full glass border border-border shadow-sm">
+            <div className="inline-flex items-center gap-1 p-1 rounded-full glass border border-border">
               {[
                 { key: 'offices' as const, label: '🏢 Offices' },
                 { key: 'explore' as const, label: '🗺 Explore' },
@@ -79,7 +76,7 @@ export default function MapPage() {
                   onClick={() => { setMode(key); closeAll(); }}
                   className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all ${
                     mode === key
-                      ? 'gradient-primary text-primary-foreground shadow-sm'
+                      ? 'gradient-primary text-primary-foreground'
                       : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
@@ -90,7 +87,7 @@ export default function MapPage() {
           </div>
         </div>
 
-        {/* Office View - Pod Bubbles */}
+        {/* Office View */}
         {mode === 'offices' && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="relative w-full max-w-md aspect-square">
@@ -113,20 +110,18 @@ export default function MapPage() {
                     style={{ top: pos.top, left: pos.left, transform: 'translate(-50%, -50%)' }}
                   >
                     <div className="relative">
-                      <div className="w-20 h-20 rounded-full gradient-pod flex items-center justify-center shadow-lg shadow-primary/20">
+                      <div className="w-20 h-20 rounded-full gradient-pod flex items-center justify-center shadow-lg glow-green">
                         <div className="text-center">
                           <div className="text-primary-foreground font-black text-lg">{pod.internCount}</div>
-                          <div className="text-primary-foreground/80 text-[9px] font-semibold">interns</div>
+                          <div className="text-primary-foreground/70 text-[9px] font-semibold">interns</div>
                         </div>
                       </div>
-                      {/* Stacked avatars */}
                       <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex -space-x-1.5">
                         {pod.interns.slice(0, 3).map(intern => (
                           <AvatarCircle key={intern.id} name={intern.name} size="sm" className="ring-2 ring-background" />
                         ))}
                       </div>
-                      {/* Label */}
-                      <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-bold text-foreground bg-card px-2 py-0.5 rounded-full shadow-sm border border-border">
+                      <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-bold text-foreground bg-card px-2 py-0.5 rounded-full border border-border">
                         {pod.name}
                       </div>
                     </div>
@@ -141,7 +136,6 @@ export default function MapPage() {
         {mode === 'explore' && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="relative w-full max-w-md aspect-square">
-              {/* Event Pins */}
               {sponsoredEvents.map((event, i) => {
                 const positions = [
                   { top: '20%', left: '60%' },
@@ -160,16 +154,15 @@ export default function MapPage() {
                     className="absolute z-10"
                     style={{ top: pos.top, left: pos.left, transform: 'translate(-50%, -50%)' }}
                   >
-                    <div className="w-10 h-10 rounded-full gradient-gold flex items-center justify-center shadow-md shadow-sponsored/30">
+                    <div className="w-10 h-10 rounded-full gradient-gold flex items-center justify-center shadow-md">
                       <span className="text-lg">📅</span>
                     </div>
-                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-bold text-foreground bg-card px-2 py-0.5 rounded-full shadow-sm border border-border">
+                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-bold text-foreground bg-card px-2 py-0.5 rounded-full border border-border">
                       {event.company}
                     </div>
                   </motion.button>
                 );
               })}
-              {/* Hotspot Pins */}
               {hotspots.map((spot, i) => {
                 const positions = [
                   { top: '55%', left: '20%' },
@@ -178,7 +171,7 @@ export default function MapPage() {
                   { top: '80%', left: '35%' },
                 ];
                 const pos = positions[i % positions.length];
-                const pinColor = spot.rating >= 4.5 ? 'bg-verified' : spot.rating >= 3.5 ? 'bg-yellow-500' : 'bg-destructive';
+                const pinColor = spot.rating >= 4.5 ? 'bg-primary' : spot.rating >= 3.5 ? 'bg-yellow-500' : 'bg-destructive';
                 return (
                   <motion.button
                     key={spot.id}
@@ -193,7 +186,7 @@ export default function MapPage() {
                       <MapPin className="w-4 h-4 text-primary-foreground" />
                     </div>
                     {spot.tagCount >= 5 && (
-                      <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-verified flex items-center justify-center">
+                      <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary flex items-center justify-center">
                         <span className="text-[8px] text-primary-foreground">✓</span>
                       </div>
                     )}
@@ -204,14 +197,14 @@ export default function MapPage() {
           </div>
         )}
 
-        {/* My Location Button */}
+        {/* My Location */}
         <button className="absolute bottom-24 right-4 z-20 w-11 h-11 rounded-full bg-card border border-border shadow-lg flex items-center justify-center hover:bg-muted transition-colors">
           <Crosshair className="w-5 h-5 text-foreground" />
         </button>
 
-        {/* Drop a Hotspot FAB */}
+        {/* Drop Hotspot FAB */}
         {mode === 'explore' && (
-          <button className="absolute bottom-24 right-4 z-20 flex items-center gap-2 px-4 py-3 rounded-full gradient-primary text-primary-foreground font-semibold text-sm shadow-lg shadow-primary/25 mr-14">
+          <button className="absolute bottom-24 left-4 z-20 flex items-center gap-2 px-4 py-3 rounded-full gradient-primary text-primary-foreground font-semibold text-sm shadow-lg glow-green">
             <Plus className="w-4 h-4" />
             Drop a Hotspot
           </button>
@@ -234,16 +227,14 @@ export default function MapPage() {
                     <p className="text-sm text-muted-foreground">{activePod.internCount} interns · {activePod.companies.join(', ')}</p>
                   </div>
                   <button onClick={closeAll} className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                    <X className="w-4 h-4" />
+                    <X className="w-4 h-4 text-foreground" />
                   </button>
                 </div>
-                {/* Company logos */}
                 <div className="flex gap-2 mb-4">
                   {activePod.companies.map(c => (
                     <div key={c} className="px-3 py-1 rounded-full bg-muted text-xs font-semibold text-foreground">{c}</div>
                   ))}
                 </div>
-                {/* Intern list */}
                 <div className="space-y-3">
                   {activePod.interns.map(intern => (
                     <div key={intern.id} className="flex items-center gap-3 p-3 rounded-xl bg-muted/50">
@@ -253,17 +244,17 @@ export default function MapPage() {
                         <div className="text-xs text-muted-foreground">{intern.company}</div>
                         <div className="flex gap-1 mt-1">
                           {intern.interests.slice(0, 2).map(tag => (
-                            <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">{tag}</span>
+                            <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-primary/15 text-primary font-medium">{tag}</span>
                           ))}
                         </div>
                       </div>
-                      <button className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                      <button className="w-8 h-8 rounded-full bg-primary/15 flex items-center justify-center text-primary">
                         <MessageCircle className="w-4 h-4" />
                       </button>
                     </div>
                   ))}
                 </div>
-                <Button className="w-full mt-4 h-12 rounded-xl gradient-primary text-primary-foreground font-bold">
+                <Button className="w-full mt-4 h-12 rounded-xl gradient-primary text-primary-foreground font-bold glow-green">
                   <MessageCircle className="w-4 h-4 mr-2" />
                   Join Pod Chat
                 </Button>
@@ -294,13 +285,13 @@ export default function MapPage() {
                     </div>
                   </div>
                   <button onClick={closeAll} className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                    <X className="w-4 h-4" />
+                    <X className="w-4 h-4 text-foreground" />
                   </button>
                 </div>
                 <div className="text-sm text-muted-foreground mb-2">{activeEvent.date} · {activeEvent.time} · {activeEvent.location}</div>
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {activeEvent.tags.map(tag => (
-                    <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-sponsored/10 text-sponsored font-medium">{tag}</span>
+                    <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-sponsored/15 text-sponsored font-medium">{tag}</span>
                   ))}
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">{activeEvent.description}</p>
@@ -334,14 +325,14 @@ export default function MapPage() {
                     <div className="text-sm text-muted-foreground">{activeHotspot.address}</div>
                   </div>
                   <button onClick={closeAll} className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                    <X className="w-4 h-4" />
+                    <X className="w-4 h-4 text-foreground" />
                   </button>
                 </div>
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-lg">⭐</span>
                   <span className="font-bold text-foreground">{activeHotspot.rating}</span>
                   {activeHotspot.tagCount >= 5 && (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-verified/10 text-verified font-semibold">✓ Verified Hotspot</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-primary/15 text-primary font-semibold">✓ Verified Hotspot</span>
                   )}
                 </div>
                 <div className="flex flex-wrap gap-1.5 mb-4">
@@ -357,7 +348,7 @@ export default function MapPage() {
                     </div>
                   ))}
                 </div>
-                <Button variant="outline" className="w-full h-11 rounded-xl font-semibold">
+                <Button variant="outline" className="w-full h-11 rounded-xl font-semibold border-border text-foreground">
                   Leave a Note
                 </Button>
               </div>
@@ -379,7 +370,7 @@ export default function MapPage() {
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-bold text-lg text-foreground">Events Feed</h3>
                   <button onClick={() => setShowEventList(false)} className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                    <X className="w-4 h-4" />
+                    <X className="w-4 h-4 text-foreground" />
                   </button>
                 </div>
                 <div className="space-y-3">
@@ -387,7 +378,7 @@ export default function MapPage() {
                     <button
                       key={event.id}
                       onClick={() => { setShowEventList(false); setSelectedEvent(event.id); }}
-                      className="w-full text-left p-4 rounded-2xl border border-border bg-card hover:shadow-md transition-shadow"
+                      className="w-full text-left p-4 rounded-2xl border border-border bg-card hover:border-sponsored/30 transition-colors"
                     >
                       <div className="flex items-center gap-2 mb-1">
                         <div className="w-6 h-6 rounded-md gradient-gold flex items-center justify-center">
@@ -399,7 +390,7 @@ export default function MapPage() {
                       <div className="text-xs text-muted-foreground mb-2">{event.date} · {event.time}</div>
                       <div className="flex flex-wrap gap-1">
                         {event.tags.map(tag => (
-                          <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-sponsored/10 text-sponsored font-medium">{tag}</span>
+                          <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-sponsored/15 text-sponsored font-medium">{tag}</span>
                         ))}
                       </div>
                       <div className="flex items-center justify-between mt-2">
