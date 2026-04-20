@@ -7,8 +7,8 @@
 ## Setup
 
 # 1. Clone and install
-git clone https://github.com/dmackn/intern-connect-64.git
-cd intern-connect-64
+git clone repo
+cd into repo
 npm install
 
 # 2. Create a .env file in the project root
