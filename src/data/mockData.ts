@@ -93,6 +93,29 @@ export interface FriendLocation {
   lng: number;
 }
 
+export interface EventStory {
+  id: string;
+  eventId: string;
+  user: string;
+  userInit: string;
+  userColor: string;
+  caption: string;
+  emoji: string;
+  time: string;
+  expiresIn: string;
+}
+
+export interface WhoIsOut {
+  id: string;
+  name: string;
+  init: string;
+  color: string;
+  venue: string;
+  emoji: string;
+  expiresIn: string;
+  podName: string;
+}
+
 export const INTERESTS = [
   { label: 'Food & Restaurants', emoji: '🍔' },
   { label: 'Fitness & Gym', emoji: '🏋️' },
@@ -140,12 +163,12 @@ export const sponsoredEvents: SponsoredEvent[] = [
 export const hotspots: Hotspot[] = [
   { id: 'h1', name: 'The Painted Pin', address: '737 Miami Cir NE, Atlanta, GA', rating: 4.6, tags: ['Good Vibes', 'Nightlife', 'Intern-Friendly'], notes: [{ user: 'Tyler R.', text: 'Best bowling alley vibes. Tuesday nights are quiet.', date: '2 days ago' }, { user: 'Aisha K.', text: 'Great cocktails and chill atmosphere.', date: '5 days ago' }], tagCount: 18, lat: 33.8140, lng: -84.3620 },
   { id: 'h2', name: 'Ponce City Market Rooftop', address: '675 Ponce De Leon Ave, Atlanta, GA', rating: 4.8, tags: ['Rooftop', 'Great Views', 'Food'], notes: [{ user: 'Priya S.', text: 'Sunset views are unreal. Go before 7pm.', date: '1 day ago' }, { user: 'Jordan M.', text: 'Mini golf up here is surprisingly fun.', date: '3 days ago' }], tagCount: 31, lat: 33.7726, lng: -84.3655 },
-  { id: 'h3', name: 'Krog Street Market', address: '99 Krog St NE, Atlanta, GA', rating: 4.4, tags: ['Food', 'Casual', 'Cheap'], notes: [{ user: 'Marcus T.', text: 'Gu\'s Dumplings is a must.', date: '4 days ago' }], tagCount: 12, lat: 33.7580, lng: -84.3630 },
+  { id: 'h3', name: 'Krog Street Market', address: '99 Krog St NE, Atlanta, GA', rating: 4.4, tags: ['Food', 'Casual', 'Cheap'], notes: [{ user: 'Marcus T.', text: "Gu's Dumplings is a must.", date: '4 days ago' }], tagCount: 12, lat: 33.7580, lng: -84.3630 },
   { id: 'h4', name: 'Piedmont Park', address: 'Piedmont Park, Atlanta, GA', rating: 4.7, tags: ['Running', 'Pickup Games', 'Free'], notes: [{ user: 'Emma W.', text: 'Morning runs here are perfect.', date: '1 day ago' }, { user: 'Marcus T.', text: 'Basketball courts by the lake are solid.', date: '2 days ago' }], tagCount: 24, lat: 33.7879, lng: -84.3732 },
 ];
 
 export const chatGroups: ChatGroup[] = [
-  { id: 'c1', name: 'Atlanta Interns Summer \'25', type: 'city', emoji: '🏙️', memberCount: 148, description: 'All Atlanta interns — events, meetups, and good vibes', lastMessage: { sender: 'Jordan', text: "who's going to the Goldman thing Friday?", time: '2m ago' }, unreadCount: 5, joined: true },
+  { id: 'c1', name: "Atlanta Interns Summer '25", type: 'city', emoji: '🏙️', memberCount: 148, description: 'All Atlanta interns — events, meetups, and good vibes', lastMessage: { sender: 'Jordan', text: "who's going to the Goldman thing Friday?", time: '2m ago' }, unreadCount: 5, joined: true },
   { id: 'c2', name: 'McKinsey Interns', type: 'company', emoji: '💼', memberCount: 23, description: 'McKinsey summer analyst cohort', lastMessage: { sender: 'Priya', text: 'anyone else need help with the Excel model?', time: '15m ago' }, unreadCount: 2, joined: true },
   { id: 'c3', name: 'Ponce City Market Pod', type: 'pod', emoji: '🏢', memberCount: 22, description: 'Interns working at Ponce City Market offices', lastMessage: { sender: 'Aisha', text: 'grabbing lunch in 10 if anyone wants to join', time: '1h ago' }, unreadCount: 0, joined: true },
   { id: 'c4', name: 'ATL Fitness', type: 'interest', emoji: '🏋️', memberCount: 41, description: 'Gym buddies, runners, and pickup game lovers', lastMessage: { sender: 'Marcus', text: 'morning run at Piedmont at 7am tomorrow', time: '3h ago' }, unreadCount: 1, joined: true },
@@ -185,4 +208,19 @@ export const friendLocations: FriendLocation[] = [
   { id: 'f3', name: 'Alex K.', photo: '', city: 'Chicago', company: 'BCG', lat: 41.8827, lng: -87.6233 },
   { id: 'f4', name: 'Zara H.', photo: '', city: 'Seattle', company: 'Amazon', lat: 47.6062, lng: -122.3321 },
   { id: 'f5', name: 'Kai N.', photo: '', city: 'Austin', company: 'Meta', lat: 30.2672, lng: -97.7431 },
+];
+
+export const eventStories: EventStory[] = [
+  { id: 's1', eventId: 'e1', user: 'Tyler R.', userInit: 'TR', userColor: '#7C3AED', caption: 'Rooftop views are insane right now 🌆', emoji: '🌆', time: '8:42 PM', expiresIn: '3h left' },
+  { id: 's2', eventId: 'e1', user: 'Aisha K.', userInit: 'AK', userColor: '#0D9488', caption: 'Free drinks + good people = perfect Friday', emoji: '🍸', time: '8:55 PM', expiresIn: '3h left' },
+  { id: 's3', eventId: 'e1', user: 'Jordan M.', userInit: 'JM', userColor: '#4F46E5', caption: 'Just met someone from my hometown here lol', emoji: '😂', time: '9:10 PM', expiresIn: '2h left' },
+  { id: 's4', eventId: 'e2', user: 'Marcus T.', userInit: 'MT', userColor: '#0D9488', caption: 'F1 simulator is no joke 🏎️', emoji: '🏎️', time: '6:30 PM', expiresIn: '18h left' },
+  { id: 's5', eventId: 'e2', user: 'Priya S.', userInit: 'PS', userColor: '#4F46E5', caption: 'Taco bar is incredible, highly recommend', emoji: '🌮', time: '7:00 PM', expiresIn: '17h left' },
+];
+
+export const whoIsOut: WhoIsOut[] = [
+  { id: 'w1', name: 'Aisha K.', init: 'AK', color: '#0D9488', venue: 'The Painted Pin', emoji: '🎳', expiresIn: '2h left', podName: 'Ponce City Market' },
+  { id: 'w2', name: 'Tyler R.', init: 'TR', color: '#7C3AED', venue: 'SkyLounge Rooftop', emoji: '🍸', expiresIn: '1h left', podName: 'Buckhead' },
+  { id: 'w3', name: 'Marcus T.', init: 'MT', color: '#0D9488', venue: 'Piedmont Park', emoji: '🏀', expiresIn: '45m left', podName: 'Midtown ATL' },
+  { id: 'w4', name: 'Sofia L.', init: 'SL', color: '#D97706', venue: 'Krog Street Market', emoji: '🍜', expiresIn: '3h left', podName: 'Midtown ATL' },
 ];

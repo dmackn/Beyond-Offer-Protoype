@@ -1,118 +1,92 @@
-import { motion } from 'framer-motion';
-import { ArrowRight, MapPin, MessageCircle, Sparkles, Users } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
 
 export default function LandingPage() {
+  const [splash, setSplash] = useState(true);
   const navigate = useNavigate();
 
-  return (
-    <div className="min-h-screen bg-background overflow-hidden">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border">
-        <div className="max-w-6xl mx-auto flex items-center justify-between px-6 h-16">
-          <h1 className="text-xl font-extrabold tracking-tight text-foreground">
-            Beyond<span className="text-gradient">Offer</span>
-          </h1>
-          <Button onClick={() => navigate('/onboarding')} size="sm" className="gradient-primary text-primary-foreground font-semibold rounded-full px-6">
-            Get Started
-          </Button>
-        </div>
-      </header>
+  useEffect(() => {
+    const t = setTimeout(() => setSplash(false), 2000);
+    return () => clearTimeout(t);
+  }, []);
 
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 px-6">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-primary/8 blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-secondary/8 blur-3xl" />
-        </div>
-        <div className="relative max-w-3xl mx-auto text-center">
+  return (
+    <div style={{ minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column', fontFamily: 'Inter, system-ui, sans-serif', maxWidth: '430px', margin: '0 auto', position: 'relative', overflow: 'hidden' }}>
+      <AnimatePresence mode="wait">
+        {splash ? (
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
+            key="splash"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-              <Sparkles className="w-4 h-4" />
-              Built for summer interns
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}
+            >
+              <div style={{ width: '72px', height: '72px', background: '#111', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ fontSize: '32px' }}>🌆</span>
+              </div>
+              <div style={{ fontSize: '26px', fontWeight: '800', color: '#111', letterSpacing: '-0.5px' }}>
+                Beyond<span style={{ color: '#22C55E' }}>Offers</span>
+              </div>
+            </motion.div>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="login"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: '100vh' }}
+          >
+            {/* Top area */}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 28px 40px' }}>
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+                <div style={{ fontSize: '13px', fontWeight: '600', color: '#22C55E', marginBottom: '12px', letterSpacing: '0.02em' }}>
+                  Summer 2025
+                </div>
+                <h1 style={{ fontSize: '38px', fontWeight: '800', color: '#111', lineHeight: '1.1', letterSpacing: '-1px', marginBottom: '14px' }}>
+                  Find your people<br />before day one.
+                </h1>
+                <p style={{ fontSize: '16px', color: '#888', lineHeight: '1.6', marginBottom: '0' }}>
+                  Connect with interns at your office, in your city, and who share your vibe.
+                </p>
+              </motion.div>
             </div>
-            <h2 className="text-5xl sm:text-6xl font-black tracking-tight leading-[1.1] mb-6 text-foreground">
-              Your city.<br />
-              <span className="text-gradient">Your people.</span><br />
-              Your summer.
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
-              Moving to a new city for your internship? BeyondOffer connects you with other interns nearby — find your pod, join the conversation, and make this the best summer yet.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button
-                onClick={() => navigate('/onboarding')}
-                size="lg"
-                className="gradient-primary text-primary-foreground font-bold rounded-full px-8 h-12 text-base glow-green hover:opacity-90 transition-opacity"
-              >
-                Join the Community
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => navigate('/map')}
-                className="rounded-full px-8 h-12 text-base font-semibold border-border text-foreground hover:bg-muted"
-              >
-                Explore the Map
-              </Button>
+
+            {/* Bottom area */}
+            <div style={{ padding: '0 28px 52px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+                <button
+                  onClick={() => navigate('/onboarding')}
+                  style={{ width: '100%', background: '#111', color: '#fff', border: 'none', borderRadius: '14px', padding: '16px', fontSize: '16px', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', letterSpacing: '-0.2px' }}
+                >
+                  Create your profile
+                  <ArrowRight style={{ width: '18px', height: '18px' }} />
+                </button>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}>
+                <button
+                  onClick={() => navigate('/map')}
+                  style={{ width: '100%', background: 'none', color: '#111', border: '1.5px solid #E5E5E5', borderRadius: '14px', padding: '16px', fontSize: '16px', fontWeight: '600', cursor: 'pointer' }}
+                >
+                  Log in
+                </button>
+              </motion.div>
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }} style={{ textAlign: 'center', fontSize: '12px', color: '#bbb', marginTop: '4px' }}>
+                By continuing you agree to our Terms & Privacy Policy
+              </motion.p>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { icon: MapPin, title: 'Community Map', desc: 'See intern pods at every office. Find who works nearby and explore hotspots other interns love.', color: 'bg-primary/10 text-primary' },
-              { icon: MessageCircle, title: 'Group Chats', desc: 'Auto-join chats for your city, company, and interests. Coordinate dinner, gym sessions, and weekend plans.', color: 'bg-primary/10 text-primary' },
-              { icon: Users, title: 'Sponsored Events', desc: 'Companies host mixers, game nights, and panels just for interns. RSVP and connect with talent.', color: 'bg-sponsored/10 text-sponsored' },
-            ].map(({ icon: Icon, title, desc, color }, i) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 + i * 0.15 }}
-                className="relative p-6 rounded-2xl border border-border bg-card hover:border-primary/30 transition-colors"
-              >
-                <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center mb-4`}>
-                  <Icon className="w-6 h-6" />
-                </div>
-                <h3 className="font-bold text-lg mb-2 text-foreground">{title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="py-16 px-6 border-t border-border">
-        <div className="max-w-4xl mx-auto grid grid-cols-3 gap-8 text-center">
-          {[
-            { val: '2,400+', label: 'Interns Connected' },
-            { val: '8 Cities', label: 'And Growing' },
-            { val: '150+', label: 'Companies' },
-          ].map(({ val, label }) => (
-            <div key={label}>
-              <div className="text-3xl font-black text-gradient">{val}</div>
-              <div className="text-sm text-muted-foreground mt-1">{label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-8 px-6 border-t border-border text-center text-sm text-muted-foreground">
-        © 2025 BeyondOffer. Built for interns, by interns.
-      </footer>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
