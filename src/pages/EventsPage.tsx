@@ -3,25 +3,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Users, MapPin, Calendar, X, Radio, Navigation } from 'lucide-react';
 import AppLayout from '@/components/AppLayout';
 import EventStories from '@/components/EventStories';
-import { sponsoredEvents, whoIsOut, eventStories } from '@/data/mockData';
+import { whoIsOut, eventStories, CITY_EVENTS } from '@/data/mockData';
+import { useAppContext } from '@/context/AppContext';
 
 const LIVE_EVENT_IDS = ['e1', 'e2'];
 
 export default function EventsPage() {
-  const [rsvped, setRsvped] = useState<Set<string>>(new Set());
+  const { rsvped, addRsvp } = useAppContext();
   const [openStories, setOpenStories] = useState<string | null>(null);
   const [droppingPin, setDroppingPin] = useState(false);
   const [pinVenue, setPinVenue] = useState('');
   const [pinDropped, setPinDropped] = useState(false);
   const [whoIsOutList, setWhoIsOutList] = useState(whoIsOut);
 
-  const toggleRsvp = (id: string) => {
-    setRsvped(prev => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id); else next.add(id);
-      return next;
-    });
-  };
+  const toggleRsvp = (id: string) => addRsvp(id);
 
   const handleDropPin = () => {
     if (!pinVenue.trim()) return;
@@ -31,7 +26,8 @@ export default function EventsPage() {
     setTimeout(() => setPinDropped(false), 3000);
   };
 
-  const activeEvent = openStories ? sponsoredEvents.find(e => e.id === openStories) : null;
+  const allEvents = Object.values(CITY_EVENTS).flat();
+  const activeEvent = openStories ? allEvents.find(e => e.id === openStories) : null;
 
   return (
     <AppLayout>
@@ -118,7 +114,7 @@ export default function EventsPage() {
 
         {/* Events */}
         <div style={{ padding: '0 20px 80px' }}>
-          {sponsoredEvents.map((event, i) => {
+          {Object.values(CITY_EVENTS).flat().map((event, i) => {
             const isLive = LIVE_EVENT_IDS.includes(event.id);
             const storyCount = eventStories.filter(s => s.eventId === event.id).length;
             const isRsvped = rsvped.has(event.id);
@@ -192,7 +188,7 @@ export default function EventsPage() {
                       ))}
                     </div>
                     <span style={{ fontSize: '12px', color: '#666' }}>
-                      <span style={{ fontWeight: '600', color: '#111' }}>Jordan, Aisha + {event.rsvpCount + (isRsvped ? 1 : 0) - 3} others</span> are going
+                      <span style={{ fontWeight: '600', color: '#111' }}>Jordan, Aisha + {Math.max(0, event.rsvpCount + (isRsvped ? 1 : 0) - 3)} others</span>
                     </span>
                   </div>
 

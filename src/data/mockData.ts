@@ -224,3 +224,86 @@ export const whoIsOut: WhoIsOut[] = [
   { id: 'w3', name: 'Marcus T.', init: 'MT', color: '#0D9488', venue: 'Piedmont Park', emoji: '🏀', expiresIn: '45m left', podName: 'Midtown ATL' },
   { id: 'w4', name: 'Sofia L.', init: 'SL', color: '#D97706', venue: 'Krog Street Market', emoji: '🍜', expiresIn: '3h left', podName: 'Midtown ATL' },
 ];
+
+export interface CityEvent {
+  id: string;
+  title: string;
+  company: string;
+  date: string;
+  time: string;
+  location: string;
+  tags: string[];
+  description: string;
+  rsvpCount: number;
+  lng: number;
+  lat: number;
+}
+
+export const CITY_EVENTS: Record<string, CityEvent[]> = {
+  Atlanta: [
+    { id: 'atl1', title: 'Goldman Sachs Intern Mixer @ SkyLounge', company: 'Goldman Sachs', date: 'July 18', time: '7:00 PM', location: 'SkyLounge Rooftop, Midtown', tags: ['Networking', 'Rooftop', 'Free Drinks'], description: 'Exclusive rooftop mixer with panoramic Midtown views.', rsvpCount: 67, lng: -84.3860, lat: 33.7866 },
+    { id: 'atl2', title: 'PrizePicks Game Night @ F1 Arcade', company: 'PrizePicks', date: 'July 25', time: '6:00 PM', location: 'F1 Arcade, Ponce City Market', tags: ['Social', 'Games', 'Free Food'], description: 'Racing simulators, arcade games, and a taco bar.', rsvpCount: 89, lng: -84.3655, lat: 33.7726 },
+    { id: 'atl3', title: 'Deloitte Career Panel + Happy Hour', company: 'Deloitte', date: 'Aug 2', time: '5:30 PM', location: 'The Painted Pin, Buckhead', tags: ['Recruiting', 'Networking'], description: 'Hear from Deloitte partners. Followed by open bar.', rsvpCount: 44, lng: -84.3798, lat: 33.8400 },
+    { id: 'atl4', title: 'Chick-fil-A HQ Tour + Lunch', company: 'Chick-fil-A', date: 'Aug 8', time: '12:00 PM', location: 'Chick-fil-A HQ, College Park', tags: ['Food', 'Office Tour'], description: 'Exclusive HQ tour and free lunch for Atlanta interns.', rsvpCount: 112, lng: -84.4277, lat: 33.6407 },
+  ],
+  NYC: [
+    { id: 'nyc1', title: 'JPMorgan Intern Rooftop Mixer', company: 'JPMorgan', date: 'July 20', time: '7:00 PM', location: '230 Fifth Rooftop Bar', tags: ['Networking', 'Rooftop', 'Finance'], description: 'NYC summer intern mixer with Empire State Building views.', rsvpCount: 120, lng: -73.9897, lat: 40.7441 },
+    { id: 'nyc2', title: 'Spotify Office Tour + Live Set', company: 'Spotify', date: 'July 28', time: '5:00 PM', location: 'Spotify NYC HQ, 4 World Trade', tags: ['Music', 'Tech', 'Networking'], description: 'Tour the Spotify office and catch a live set.', rsvpCount: 78, lng: -74.0112, lat: 40.7127 },
+    { id: 'nyc3', title: 'BlackRock Investment Summit', company: 'BlackRock', date: 'Aug 3', time: '4:00 PM', location: 'BlackRock HQ, 55 E 52nd St', tags: ['Finance', 'Investing', 'Panel'], description: 'Investment panels and networking with BlackRock analysts.', rsvpCount: 55, lng: -73.9762, lat: 40.7580 },
+    { id: 'nyc4', title: 'McKinsey x BCG Intern Social', company: 'McKinsey', date: 'Aug 10', time: '7:00 PM', location: 'The Top of the Standard', tags: ['Consulting', 'Networking', 'Rooftop'], description: 'Cross-firm intern social on one of NYC\'s best rooftops.', rsvpCount: 94, lng: -74.0075, lat: 40.7412 },
+  ],
+  SF: [
+    { id: 'sf1', title: 'Uber Engineering Intern Demo Day', company: 'Uber', date: 'July 22', time: '3:00 PM', location: 'Uber HQ, 1515 3rd St', tags: ['Tech', 'Demo Day'], description: 'Showcase your intern project to Uber engineers.', rsvpCount: 88, lng: -122.3882, lat: 37.7694 },
+    { id: 'sf2', title: 'Airbnb Intern Summer Party', company: 'Airbnb', date: 'July 26', time: '6:00 PM', location: 'Airbnb HQ, 888 Brannan St', tags: ['Social', 'Free Food', 'Networking'], description: 'Summer intern bash at Airbnb\'s iconic HQ.', rsvpCount: 145, lng: -122.4016, lat: 37.7703 },
+    { id: 'sf3', title: 'Stripe Payments Summit', company: 'Stripe', date: 'Aug 1', time: '4:00 PM', location: 'Stripe HQ, South San Francisco', tags: ['Fintech', 'Tech'], description: 'Deep dive into the future of payments.', rsvpCount: 62, lng: -122.4058, lat: 37.6547 },
+    { id: 'sf4', title: 'Google Intern Day @ Googleplex', company: 'Google', date: 'Aug 5', time: '10:00 AM', location: 'Googleplex, Mountain View', tags: ['Tech', 'Campus Tour'], description: 'Full day at the Googleplex with tours and talks.', rsvpCount: 201, lng: -122.0841, lat: 37.3861 },
+  ],
+  Chicago: [
+    { id: 'chi1', title: 'Accenture Intern Happy Hour', company: 'Accenture', date: 'July 24', time: '6:00 PM', location: "Cindy's Rooftop, The Loop", tags: ['Consulting', 'Rooftop'], description: 'Happy hour with Millennium Park views.', rsvpCount: 55, lng: -87.6246, lat: 41.8858 },
+    { id: 'chi2', title: 'Morningstar Investing Panel', company: 'Morningstar', date: 'Aug 1', time: '5:00 PM', location: 'Morningstar HQ', tags: ['Finance', 'Investing'], description: 'Learn about investment research from Morningstar analysts.', rsvpCount: 38, lng: -87.6344, lat: 41.8832 },
+    { id: 'chi3', title: "McDonald's Intern HQ Tour", company: "McDonald's", date: 'Aug 7', time: '11:00 AM', location: "McDonald's Global HQ, West Loop", tags: ['Food', 'Office Tour'], description: "Exclusive tour of McDonald's global HQ.", rsvpCount: 73, lng: -87.6516, lat: 41.8836 },
+  ],
+  Austin: [
+    { id: 'aus1', title: 'Dell Technologies Intern BBQ', company: 'Dell', date: 'July 26', time: '5:00 PM', location: 'Barton Creek Greenbelt', tags: ['Social', 'BBQ', 'Outdoors'], description: 'Texas-style BBQ with live music.', rsvpCount: 88, lng: -97.7956, lat: 30.2353 },
+    { id: 'aus2', title: 'Apple Austin Intern Mixer', company: 'Apple', date: 'July 31', time: '6:30 PM', location: 'Apple Tower Theatre, 6th St', tags: ['Tech', 'Networking'], description: "Intern mixer at Apple's stunning Austin flagship.", rsvpCount: 134, lng: -97.7431, lat: 30.2672 },
+    { id: 'aus3', title: 'Tesla Gigafactory Tour', company: 'Tesla', date: 'Aug 4', time: '10:00 AM', location: 'Tesla Gigafactory Texas', tags: ['Engineering', 'Tour', 'EV'], description: 'Rare intern access to the Gigafactory floor.', rsvpCount: 45, lng: -97.6200, lat: 30.2200 },
+  ],
+  Boston: [
+    { id: 'bos1', title: 'Fidelity Investments Intern Night', company: 'Fidelity', date: 'July 30', time: '6:30 PM', location: 'Prudential Center, Back Bay', tags: ['Finance', 'Networking'], description: 'Meet other finance interns across Boston firms.', rsvpCount: 67, lng: -71.0845, lat: 42.3471 },
+    { id: 'bos2', title: 'HubSpot Intern Growth Summit', company: 'HubSpot', date: 'Aug 3', time: '4:00 PM', location: 'HubSpot HQ, 25 First St Cambridge', tags: ['Marketing', 'Tech'], description: 'Marketing and growth panels with HubSpot leaders.', rsvpCount: 52, lng: -71.0892, lat: 42.3626 },
+    { id: 'bos3', title: 'Moderna Biotech Intern Symposium', company: 'Moderna', date: 'Aug 9', time: '3:00 PM', location: 'Moderna HQ, Kendall Square', tags: ['Biotech', 'Science'], description: 'Behind-the-scenes look at mRNA research.', rsvpCount: 41, lng: -71.0892, lat: 42.3626 },
+  ],
+  Seattle: [
+    { id: 'sea1', title: 'Amazon Intern Summit', company: 'Amazon', date: 'Aug 1', time: '4:00 PM', location: 'Amazon HQ, South Lake Union', tags: ['Tech', 'Networking', 'Summit'], description: 'The biggest intern event of the Seattle summer.', rsvpCount: 218, lng: -122.3365, lat: 47.6254 },
+    { id: 'sea2', title: 'Microsoft Intern Hackathon', company: 'Microsoft', date: 'July 27', time: '9:00 AM', location: 'Microsoft Redmond Campus', tags: ['Hackathon', 'Tech', 'Prizes'], description: '24-hour hackathon with $10k in prizes.', rsvpCount: 156, lng: -122.1215, lat: 47.6740 },
+    { id: 'sea3', title: 'Starbucks Reserve Roastery Tour', company: 'Starbucks', date: 'Aug 6', time: '10:00 AM', location: 'Starbucks Reserve Roastery, Capitol Hill', tags: ['Coffee', 'Tour', 'Social'], description: 'Behind-the-scenes tour of the iconic Reserve Roastery.', rsvpCount: 89, lng: -122.3148, lat: 47.6253 },
+  ],
+  LA: [
+    { id: 'la1', title: 'Snap Intern Beach Day', company: 'Snap', date: 'July 27', time: '12:00 PM', location: 'Santa Monica Beach', tags: ['Social', 'Beach', 'Free Food'], description: 'Beach day with the Snap intern cohort.', rsvpCount: 145, lng: -118.4912, lat: 34.0195 },
+    { id: 'la2', title: 'Netflix Intern Screening Night', company: 'Netflix', date: 'Aug 2', time: '7:00 PM', location: 'Netflix HQ, 5808 Sunset Blvd', tags: ['Entertainment', 'Social', 'Exclusive'], description: 'Private screening of an unreleased Netflix original.', rsvpCount: 98, lng: -118.3210, lat: 34.0980 },
+    { id: 'la3', title: 'SpaceX Rocket Launch Viewing', company: 'SpaceX', date: 'Aug 8', time: '6:00 AM', location: 'SpaceX HQ, Hawthorne', tags: ['Engineering', 'Space', 'Exclusive'], description: 'Watch a live rocket launch with SpaceX engineers.', rsvpCount: 67, lng: -118.3280, lat: 33.9208 },
+    { id: 'la4', title: 'Riot Games Intern Game Night', company: 'Riot Games', date: 'July 30', time: '5:00 PM', location: 'Riot Games HQ, West LA', tags: ['Gaming', 'Social', 'Free Food'], description: 'Play unreleased titles and meet the dev team.', rsvpCount: 189, lng: -118.4165, lat: 34.0378 },
+  ],
+  London: [
+    { id: 'lon1', title: 'Goldman Sachs London Intern Mixer', company: 'Goldman Sachs', date: 'July 21', time: '7:00 PM', location: 'Aqua Shard, London Bridge', tags: ['Finance', 'Networking', 'Rooftop'], description: 'Networking drinks with stunning Thames views.', rsvpCount: 88, lng: -0.0865, lat: 51.5045 },
+    { id: 'lon2', title: 'Google London Intern Day', company: 'Google', date: 'Aug 4', time: '10:00 AM', location: 'Google UK HQ, Shoreditch', tags: ['Tech', 'Campus Tour'], description: "Full day at Google's London campus.", rsvpCount: 112, lng: -0.0774, lat: 51.5224 },
+  ],
+  Toronto: [
+    { id: 'tor1', title: 'Shopify Intern Build Day', company: 'Shopify', date: 'July 29', time: '9:00 AM', location: 'Shopify Toronto HQ', tags: ['Tech', 'Hackathon'], description: "Build something amazing at Shopify's Toronto office.", rsvpCount: 76, lng: -79.3930, lat: 43.6596 },
+  ],
+  Dubai: [
+    { id: 'dxb1', title: 'DIFC Intern Finance Summit', company: 'Goldman Sachs', date: 'July 23', time: '6:00 PM', location: 'DIFC Gate Village', tags: ['Finance', 'Networking'], description: "Intern networking at Dubai's premier financial district.", rsvpCount: 55, lng: 55.2796, lat: 25.2084 },
+  ],
+  Singapore: [
+    { id: 'sgp1', title: 'Grab Intern Tech Summit', company: 'Grab', date: 'July 25', time: '4:00 PM', location: 'Grab HQ, One-North', tags: ['Tech', 'Startup'], description: "Meet the team behind Southeast Asia's super app.", rsvpCount: 94, lng: 103.7877, lat: 1.2993 },
+  ],
+  Tokyo: [
+    { id: 'tyo1', title: 'Goldman Sachs Japan Intern Event', company: 'Goldman Sachs Japan', date: 'July 30', time: '6:30 PM', location: 'Roppongi Hills, Tokyo', tags: ['Finance', 'Networking'], description: 'Networking event for finance interns in Tokyo.', rsvpCount: 48, lng: 139.7317, lat: 35.6627 },
+  ],
+  Sydney: [
+    { id: 'syd1', title: 'Atlassian Intern Day', company: 'Atlassian', date: 'Aug 3', time: '2:00 PM', location: 'Atlassian HQ, Sydney CBD', tags: ['Tech', 'Startup'], description: "Spend a day at Atlassian's Sydney headquarters.", rsvpCount: 62, lng: 151.2093, lat: -33.8688 },
+  ],
+  Berlin: [
+    { id: 'ber1', title: 'Zalando Intern Tech Meetup', company: 'Zalando', date: 'July 31', time: '6:00 PM', location: 'Zalando HQ, Mitte', tags: ['Tech', 'Fashion'], description: "Meet interns from across Berlin's tech scene.", rsvpCount: 71, lng: 13.4050, lat: 52.5200 },
+  ],
+};
