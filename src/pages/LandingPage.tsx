@@ -30,8 +30,10 @@ export default function LandingPage() {
               transition={{ duration: 0.5, delay: 0.1 }}
               style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}
             >
-              <div style={{ width: '72px', height: '72px', background: '#111', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ fontSize: '32px' }}>🌆</span>
+              <div style={{ width: '72px', height: '72px', background: '#000', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ fontSize: '28px', fontWeight: '800', color: '#fff', letterSpacing: '-1px', fontFamily: 'Inter, system-ui, sans-serif' }}>
+                  B<span style={{ color: '#22C55E' }}>O</span>
+                </span>
               </div>
               <div style={{ fontSize: '26px', fontWeight: '800', color: '#111', letterSpacing: '-0.5px' }}>
                 Beyond<span style={{ color: '#22C55E' }}>Offers</span>
@@ -48,10 +50,7 @@ export default function LandingPage() {
           >
             {/* Top area */}
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 28px 40px' }}>
-              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-                <div style={{ fontSize: '13px', fontWeight: '600', color: '#22C55E', marginBottom: '12px', letterSpacing: '0.02em' }}>
-                  Summer 2025
-                </div>
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}> 
                 <h1 style={{ fontSize: '38px', fontWeight: '800', color: '#111', lineHeight: '1.1', letterSpacing: '-1px', marginBottom: '14px' }}>
                   Find your people<br />before day one.
                 </h1>
