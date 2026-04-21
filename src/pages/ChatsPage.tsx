@@ -4,16 +4,28 @@ import { Search, ArrowLeft, Send, Smile, Image, Info, Plus, X, Check, Lock, User
 import AppLayout from '@/components/AppLayout';
 import AvatarCircle from '@/components/AvatarCircle';
 import { chatGroups, chatMessages, ChatGroup, interns } from '@/data/mockData';
+import { useAppContext } from '@/context/AppContext';
 
 type View = 'list' | 'chat' | 'new-chat';
 type NewChatStep = 'type' | 'people' | 'name';
 type ChatType = 'private' | 'group';
 
+interface LocalMessage {
+  id: string;
+  sender: string;
+  senderPhoto: string;
+  text: string;
+  time: string;
+  isSelf: boolean;
+}
+
 export default function ChatsPage() {
+  const { hotspotChats } = useAppContext();
+
   const [view, setView] = useState<View>('list');
   const [activeChat, setActiveChat] = useState<ChatGroup | null>(null);
+  const [activeChatMsgs, setActiveChatMsgs] = useState<LocalMessage[]>([]);
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState(chatMessages);
   const [searchOpen, setSearchOpen] = useState(false);
   const [myChats, setMyChats] = useState(chatGroups.filter(c => c.joined));
   const [discover, setDiscover] = useState(chatGroups.filter(c => !c.joined));
@@ -27,13 +39,52 @@ export default function ChatsPage() {
 
   const atlantaInterns = interns.filter(i => i.city === 'Atlanta');
 
+  // Merge hotspot chats with my chats — hotspot chats come first
+  const allMyChats = [
+    ...hotspotChats.map(hc => ({
+      id: hc.id,
+      name: hc.name,
+      type: 'interest' as const,
+      emoji: hc.emoji,
+      memberCount: hc.members,
+      description: 'Hotspot chat',
+      lastMessage: { sender: hc.msgs[hc.msgs.length - 1]?.s || '', text: hc.last, time: hc.time },
+      unreadCount: hc.unread,
+      joined: true,
+    })),
+    ...myChats,
+  ];
+
+  const openChat = (chat: ChatGroup) => {
+    setActiveChat(chat);
+    // Check if it's a hotspot chat — load its messages from context
+    const hotspotChat = hotspotChats.find(hc => hc.id === chat.id);
+    if (hotspotChat) {
+      setActiveChatMsgs(hotspotChat.msgs.map((m, i) => ({
+        id: `hm-${i}`,
+        sender: m.s,
+        senderPhoto: '',
+        text: m.t,
+        time: m.time,
+        isSelf: m.self,
+      })));
+    } else {
+      setActiveChatMsgs(chatMessages);
+    }
+    setView('chat');
+  };
+
   const sendMessage = () => {
     if (!message.trim()) return;
     const now = new Date();
     const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-    setMessages(prev => [...prev, {
-      id: `m${Date.now()}`, sender: 'You', senderPhoto: '',
-      text: message.trim(), time, isSelf: true,
+    setActiveChatMsgs(prev => [...prev, {
+      id: `m${Date.now()}`,
+      sender: 'You',
+      senderPhoto: '',
+      text: message.trim(),
+      time,
+      isSelf: true,
     }]);
     setMessage('');
   };
@@ -53,7 +104,7 @@ export default function ChatsPage() {
     const newChat: ChatGroup = {
       id: `custom-${Date.now()}`,
       name,
-      type: chatType === 'private' ? 'interest' : 'interest',
+      type: 'interest',
       emoji: chatType === 'private' ? '👤' : groupEmoji,
       memberCount: selectedPeople.length + 1,
       description: chatType === 'private' ? 'Private chat' : 'Group chat',
@@ -63,9 +114,9 @@ export default function ChatsPage() {
     };
 
     setMyChats(prev => [newChat, ...prev]);
+    setActiveChatMsgs([]);
     setView('chat');
     setActiveChat(newChat);
-    setMessages([]);
     setSelectedPeople([]);
     setGroupName('');
     setNewChatStep('type');
@@ -77,17 +128,20 @@ export default function ChatsPage() {
 
   // Chat view
   if (view === 'chat' && activeChat) {
+    const isHotspot = hotspotChats.some(hc => hc.id === activeChat.id);
     return (
       <AppLayout>
         <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 5rem)', fontFamily: 'Inter, system-ui, sans-serif' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '0 16px', height: '56px', borderBottom: '1px solid #F0F0F0', background: '#fff', flexShrink: 0 }}>
-            <button onClick={() => { setView('list'); setActiveChat(null); setMessages(chatMessages); }} style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#F5F5F5', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <button onClick={() => { setView('list'); setActiveChat(null); }} style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#F5F5F5', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <ArrowLeft style={{ width: '16px', height: '16px', color: '#111' }} />
             </button>
             <span style={{ fontSize: '22px' }}>{activeChat.emoji}</span>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: '14px', fontWeight: '700', color: '#111', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{activeChat.name}</div>
-              <div style={{ fontSize: '12px', color: '#999' }}>{activeChat.memberCount} members</div>
+              <div style={{ fontSize: '12px', color: isHotspot ? '#16A34A' : '#999' }}>
+                {isHotspot ? '🟢 Live hotspot chat' : `${activeChat.memberCount} members`}
+              </div>
             </div>
             <button style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#F5F5F5', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Info style={{ width: '16px', height: '16px', color: '#111' }} />
@@ -95,7 +149,7 @@ export default function ChatsPage() {
           </div>
 
           <div style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {messages.map((msg, i) => (
+            {activeChatMsgs.map((msg, i) => (
               <motion.div key={msg.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.02 }}
                 style={{ display: 'flex', justifyContent: msg.isSelf ? 'flex-end' : 'flex-start', gap: '8px' }}>
                 {!msg.isSelf && <AvatarCircle name={msg.sender} size="sm" className="mt-auto" />}
@@ -138,18 +192,14 @@ export default function ChatsPage() {
     return (
       <AppLayout>
         <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 5rem)', fontFamily: 'Inter, system-ui, sans-serif' }}>
-
-          {/* Header */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '0 16px', height: '56px', borderBottom: '1px solid #F0F0F0', flexShrink: 0 }}>
             <button onClick={() => { setView('list'); setNewChatStep('type'); setSelectedPeople([]); }} style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#F5F5F5', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <X style={{ width: '16px', height: '16px', color: '#111' }} />
             </button>
             <div style={{ flex: 1, fontSize: '16px', fontWeight: '700', color: '#111' }}>New chat</div>
             {newChatStep === 'people' && selectedPeople.length > 0 && (
-              <button
-                onClick={() => chatType === 'private' ? createChat() : setNewChatStep('name')}
-                style={{ background: '#111', color: '#fff', border: 'none', borderRadius: '50px', padding: '7px 16px', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}
-              >
+              <button onClick={() => chatType === 'private' ? createChat() : setNewChatStep('name')}
+                style={{ background: '#111', color: '#fff', border: 'none', borderRadius: '50px', padding: '7px 16px', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>
                 {chatType === 'private' ? 'Start' : 'Next'}
               </button>
             )}
@@ -162,16 +212,12 @@ export default function ChatsPage() {
 
           <div style={{ flex: 1, overflowY: 'auto', padding: '20px 16px' }}>
             <AnimatePresence mode="wait">
-
-              {/* Step 1 — choose type */}
               {newChatStep === 'type' && (
                 <motion.div key="type" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
                   <div style={{ fontSize: '13px', color: '#999', marginBottom: '16px' }}>What kind of chat do you want to start?</div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <button
-                      onClick={() => { setChatType('private'); setNewChatStep('people'); }}
-                      style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '16px', border: '1.5px solid #E5E5E5', borderRadius: '16px', background: '#fff', cursor: 'pointer', textAlign: 'left' }}
-                    >
+                    <button onClick={() => { setChatType('private'); setNewChatStep('people'); }}
+                      style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '16px', border: '1.5px solid #E5E5E5', borderRadius: '16px', background: '#fff', cursor: 'pointer', textAlign: 'left' }}>
                       <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: '#F0F0F0', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                         <Lock style={{ width: '20px', height: '20px', color: '#111' }} />
                       </div>
@@ -180,10 +226,8 @@ export default function ChatsPage() {
                         <div style={{ fontSize: '13px', color: '#999' }}>Just you and one other intern</div>
                       </div>
                     </button>
-                    <button
-                      onClick={() => { setChatType('group'); setNewChatStep('people'); }}
-                      style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '16px', border: '1.5px solid #E5E5E5', borderRadius: '16px', background: '#fff', cursor: 'pointer', textAlign: 'left' }}
-                    >
+                    <button onClick={() => { setChatType('group'); setNewChatStep('people'); }}
+                      style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '16px', border: '1.5px solid #E5E5E5', borderRadius: '16px', background: '#fff', cursor: 'pointer', textAlign: 'left' }}>
                       <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: '#F0F0F0', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                         <Users style={{ width: '20px', height: '20px', color: '#111' }} />
                       </div>
@@ -196,14 +240,11 @@ export default function ChatsPage() {
                 </motion.div>
               )}
 
-              {/* Step 2 — pick people */}
               {newChatStep === 'people' && (
                 <motion.div key="people" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
                   <div style={{ fontSize: '13px', color: '#999', marginBottom: '12px' }}>
                     {chatType === 'private' ? 'Choose one intern to message' : 'Select interns to add to the group'}
                   </div>
-
-                  {/* Selected chips */}
                   {selectedPeople.length > 0 && (
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '12px' }}>
                       {selectedPeople.map(id => {
@@ -222,24 +263,17 @@ export default function ChatsPage() {
                       })}
                     </div>
                   )}
-
-                  {/* Search */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#F5F5F5', borderRadius: '10px', padding: '8px 12px', marginBottom: '14px' }}>
                     <Search style={{ width: '14px', height: '14px', color: '#999' }} />
                     <input placeholder="Search interns..." style={{ border: 'none', background: 'none', outline: 'none', fontSize: '14px', color: '#111', flex: 1, fontFamily: 'Inter, system-ui, sans-serif' }} />
                   </div>
-
-                  {/* Intern list */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     {atlantaInterns.map(intern => {
                       const selected = selectedPeople.includes(intern.id);
                       const isDisabled = chatType === 'private' && selectedPeople.length >= 1 && !selected;
                       return (
-                        <button
-                          key={intern.id}
-                          onClick={() => !isDisabled && togglePerson(intern.id)}
-                          style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '10px 12px', borderRadius: '12px', border: 'none', background: selected ? '#F0FDF4' : '#fff', cursor: isDisabled ? 'default' : 'pointer', opacity: isDisabled ? 0.4 : 1, textAlign: 'left' }}
-                        >
+                        <button key={intern.id} onClick={() => !isDisabled && togglePerson(intern.id)}
+                          style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '10px 12px', borderRadius: '12px', border: 'none', background: selected ? '#F0FDF4' : '#fff', cursor: isDisabled ? 'default' : 'pointer', opacity: isDisabled ? 0.4 : 1, textAlign: 'left' }}>
                           <AvatarCircle name={intern.name} size="md" />
                           <div style={{ flex: 1, minWidth: 0 }}>
                             <div style={{ fontSize: '14px', fontWeight: '600', color: '#111' }}>{intern.name}</div>
@@ -255,40 +289,26 @@ export default function ChatsPage() {
                 </motion.div>
               )}
 
-              {/* Step 3 — name the group */}
               {newChatStep === 'name' && (
                 <motion.div key="name" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
                   <div style={{ fontSize: '13px', color: '#999', marginBottom: '20px' }}>Give your group a name and pick an emoji.</div>
-
-                  {/* Emoji picker */}
                   <div style={{ marginBottom: '20px' }}>
                     <div style={{ fontSize: '13px', fontWeight: '600', color: '#111', marginBottom: '10px' }}>Emoji</div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                       {['💬', '🏀', '🍔', '🎉', '🏋️', '☕', '🎮', '🌃', '📈', '💻', '🎨', '🧳'].map(e => (
-                        <button
-                          key={e}
-                          onClick={() => setGroupEmoji(e)}
-                          style={{ width: '44px', height: '44px', borderRadius: '12px', border: `2px solid ${groupEmoji === e ? '#111' : '#E5E5E5'}`, background: groupEmoji === e ? '#F5F5F5' : '#fff', fontSize: '22px', cursor: 'pointer' }}
-                        >
+                        <button key={e} onClick={() => setGroupEmoji(e)}
+                          style={{ width: '44px', height: '44px', borderRadius: '12px', border: `2px solid ${groupEmoji === e ? '#111' : '#E5E5E5'}`, background: groupEmoji === e ? '#F5F5F5' : '#fff', fontSize: '22px', cursor: 'pointer' }}>
                           {e}
                         </button>
                       ))}
                     </div>
                   </div>
-
-                  {/* Group name */}
                   <div style={{ marginBottom: '20px' }}>
                     <div style={{ fontSize: '13px', fontWeight: '600', color: '#111', marginBottom: '8px' }}>Group name</div>
-                    <input
-                      value={groupName}
-                      onChange={e => setGroupName(e.target.value)}
+                    <input value={groupName} onChange={e => setGroupName(e.target.value)}
                       placeholder="e.g. Weekend crew, Gym squad..."
-                      style={{ ...s.input, width: '100%', height: '48px', borderRadius: '12px' }}
-                      autoFocus
-                    />
+                      style={{ ...s.input, width: '100%', height: '48px', borderRadius: '12px' }} autoFocus />
                   </div>
-
-                  {/* Members preview */}
                   <div>
                     <div style={{ fontSize: '13px', fontWeight: '600', color: '#111', marginBottom: '10px' }}>{selectedPeople.length} members</div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -305,7 +325,6 @@ export default function ChatsPage() {
                   </div>
                 </motion.div>
               )}
-
             </AnimatePresence>
           </div>
         </div>
@@ -317,8 +336,6 @@ export default function ChatsPage() {
   return (
     <AppLayout>
       <div style={{ maxWidth: '480px', margin: '0 auto', fontFamily: 'Inter, system-ui, sans-serif' }}>
-
-        {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 16px 8px' }}>
           <span style={{ fontSize: '22px', fontWeight: '800', color: '#111', letterSpacing: '-0.5px' }}>Chats</span>
           <div style={{ display: 'flex', gap: '8px' }}>
@@ -331,7 +348,6 @@ export default function ChatsPage() {
           </div>
         </div>
 
-        {/* Search bar */}
         <AnimatePresence>
           {searchOpen && (
             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} style={{ overflow: 'hidden', padding: '0 16px 10px' }}>
@@ -348,13 +364,19 @@ export default function ChatsPage() {
           )}
         </AnimatePresence>
 
-        {/* My Chats */}
+        {/* My Chats — includes hotspot chats */}
         <div style={{ padding: '4px 16px 0' }}>
           <div style={{ fontSize: '11px', fontWeight: '700', color: '#999', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px' }}>My Chats</div>
-          {myChats.map(chat => (
-            <button key={chat.id} onClick={() => { setActiveChat(chat); setView('chat'); setMessages(chatMessages); }}
+          {allMyChats.map(chat => (
+            <button key={chat.id} onClick={() => openChat(chat)}
               style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '12px', padding: '10px 8px', borderRadius: '14px', border: 'none', background: '#fff', cursor: 'pointer', textAlign: 'left' }}>
-              <div style={{ width: '46px', height: '46px', borderRadius: '50%', background: '#F5F5F5', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px', flexShrink: 0 }}>{chat.emoji}</div>
+              <div style={{ position: 'relative', width: '46px', height: '46px', flexShrink: 0 }}>
+                <div style={{ width: '46px', height: '46px', borderRadius: '50%', background: '#F5F5F5', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px' }}>{chat.emoji}</div>
+                {/* Green dot for hotspot live chats */}
+                {hotspotChats.some(hc => hc.id === chat.id) && (
+                  <div style={{ position: 'absolute', bottom: 1, right: 1, width: '12px', height: '12px', borderRadius: '50%', background: '#22C55E', border: '2px solid #fff' }} />
+                )}
+              </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ fontSize: '14px', fontWeight: '600', color: '#111', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{chat.name}</span>
@@ -381,13 +403,8 @@ export default function ChatsPage() {
                 <div style={{ fontSize: '14px', fontWeight: '600', color: '#111' }}>{chat.name}</div>
                 <div style={{ fontSize: '12px', color: '#999' }}>{chat.memberCount} members · {chat.description}</div>
               </div>
-              <button
-                onClick={() => {
-                  setDiscover(prev => prev.filter(c => c.id !== chat.id));
-                  setMyChats(prev => [{ ...chat, joined: true }, ...prev]);
-                }}
-                style={{ background: '#111', color: '#fff', border: 'none', borderRadius: '50px', padding: '7px 14px', fontSize: '12px', fontWeight: '600', cursor: 'pointer', flexShrink: 0 }}
-              >
+              <button onClick={() => { setDiscover(prev => prev.filter(c => c.id !== chat.id)); setMyChats(prev => [{ ...chat, joined: true }, ...prev]); }}
+                style={{ background: '#111', color: '#fff', border: 'none', borderRadius: '50px', padding: '7px 14px', fontSize: '12px', fontWeight: '600', cursor: 'pointer', flexShrink: 0 }}>
                 Join
               </button>
             </div>

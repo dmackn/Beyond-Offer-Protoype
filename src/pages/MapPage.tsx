@@ -22,6 +22,16 @@ const CITY_COORDS: Record<string, [number, number]> = {
   'Austin': [-97.7431, 30.2672],
   'Boston': [-71.0589, 42.3601],
   'LA': [-118.2437, 34.0522],
+  'Miami': [-80.1918, 25.7617],
+  'Dallas': [-96.7970, 32.7767],
+  'Denver': [-104.9903, 39.7392],
+  'DC': [-77.0369, 38.9072],
+  'Houston': [-95.3698, 29.7604],
+  'Minneapolis': [-93.2650, 44.9778],
+  'Charlotte': [-80.8431, 35.2271],
+  'Nashville': [-86.7816, 36.1627],
+  'Phoenix': [-112.0740, 33.4484],
+  'Raleigh': [-78.6382, 35.7796],
   'London': [-0.0922, 51.5155],
   'Toronto': [-79.3849, 43.6483],
   'Dubai': [55.2796, 25.2084],
@@ -43,74 +53,153 @@ interface PodData {
 const CITY_PODS: Record<string, PodData[]> = {
   Atlanta: [
     { name: 'Ponce City Market', count: 22, cos: ['McKinsey', 'Google', 'BlackRock'], color: '#4F46E5', lng: -84.3655, lat: 33.7726 },
-    { name: 'Midtown ATL', count: 11, cos: ['Deloitte', 'PwC'], color: '#0D9488', lng: -84.3830, lat: 33.7866 },
-    { name: 'Buckhead', count: 14, cos: ['Goldman Sachs', 'JPMorgan'], color: '#7C3AED', lng: -84.3798, lat: 33.8400 },
-    { name: 'Perimeter Center', count: 9, cos: ['Cox', 'NCR', 'Home Depot'], color: '#B45309', lng: -84.3450, lat: 33.9200 },
-    { name: 'Tech Square', count: 18, cos: ['Google', 'Microsoft', 'Salesforce'], color: '#0891B2', lng: -84.3963, lat: 33.7756 },
-    { name: 'Hartsfield Area', count: 7, cos: ['Delta', 'Chick-fil-A'], color: '#DC2626', lng: -84.4277, lat: 33.6407 },
-    { name: 'Cumberland', count: 12, cos: ['Home Depot HQ', 'Truist'], color: '#059669', lng: -84.4669, lat: 33.8673 },
-    { name: 'Alpharetta', count: 8, cos: ['Microsoft', 'Salesforce', 'NCR'], color: '#7C3AED', lng: -84.2941, lat: 34.0754 },
+    { name: 'Midtown ATL', count: 18, cos: ['Deloitte', 'PwC', 'Accenture'], color: '#0D9488', lng: -84.3830, lat: 33.7866 },
+    { name: 'Buckhead', count: 14, cos: ['Goldman Sachs', 'JPMorgan', 'Wells Fargo'], color: '#7C3AED', lng: -84.3798, lat: 33.8400 },
+    { name: 'Perimeter Center', count: 12, cos: ['Cox Enterprises', 'NCR', 'Fiserv'], color: '#B45309', lng: -84.3450, lat: 33.9200 },
+    { name: 'Tech Square (GT)', count: 24, cos: ['Google', 'Microsoft', 'Salesforce', 'Mailchimp'], color: '#0891B2', lng: -84.3963, lat: 33.7756 },
+    { name: 'Hartsfield Area', count: 9, cos: ['Delta Air Lines', 'Chick-fil-A', 'UPS'], color: '#DC2626', lng: -84.4277, lat: 33.6407 },
+    { name: 'Cumberland / Vinings', count: 13, cos: ['Home Depot HQ', 'Truist', 'Genuine Parts'], color: '#059669', lng: -84.4669, lat: 33.8673 },
+    { name: 'Alpharetta', count: 10, cos: ['Microsoft', 'Salesforce', 'NCR Voyix', 'Verizon'], color: '#7C3AED', lng: -84.2941, lat: 34.0754 },
+    { name: 'Downtown Atlanta', count: 16, cos: ['CNN', 'Coca-Cola HQ', 'SunTrust Park'], color: '#DC2626', lng: -84.3879, lat: 33.7490 },
+    { name: 'Sandy Springs', count: 8, cos: ['UPS HQ', 'Newell Brands', 'IHG Hotels'], color: '#059669', lng: -84.3735, lat: 33.9240 },
   ],
   NYC: [
-    { name: 'Hudson Yards', count: 34, cos: ['McKinsey', 'BCG', 'Bain'], color: '#4F46E5', lng: -74.0019, lat: 40.7540 },
-    { name: 'Midtown Manhattan', count: 58, cos: ['Goldman Sachs', 'JPMorgan', 'Citi'], color: '#DC2626', lng: -73.9857, lat: 40.7549 },
-    { name: 'Financial District', count: 29, cos: ['Morgan Stanley', 'BlackRock'], color: '#7C3AED', lng: -74.0112, lat: 40.7074 },
-    { name: 'DUMBO Brooklyn', count: 22, cos: ['Meta', 'Amazon', 'Spotify'], color: '#0D9488', lng: -73.9877, lat: 40.7033 },
-    { name: 'Flatiron District', count: 31, cos: ['Deloitte', 'KPMG', 'EY'], color: '#B45309', lng: -73.9897, lat: 40.7411 },
-    { name: 'Chelsea', count: 19, cos: ['Google NYC', 'IAC', 'Apple'], color: '#0891B2', lng: -74.0014, lat: 40.7465 },
-    { name: 'Times Square', count: 24, cos: ['Viacom', 'Ernst & Young', 'PwC'], color: '#DC2626', lng: -73.9855, lat: 40.7580 },
-    { name: 'Long Island City', count: 16, cos: ['Amazon', 'JetBlue', 'Macy\'s'], color: '#059669', lng: -73.9442, lat: 40.7447 },
+    { name: 'Hudson Yards', count: 38, cos: ['McKinsey', 'BCG', 'Bain', 'KKR', 'BlackRock'], color: '#4F46E5', lng: -74.0019, lat: 40.7540 },
+    { name: 'Midtown East', count: 62, cos: ['Goldman Sachs', 'JPMorgan', 'Citi', 'Morgan Stanley', 'BlackRock'], color: '#DC2626', lng: -73.9680, lat: 40.7549 },
+    { name: 'Financial District', count: 44, cos: ['Goldman Sachs HQ', 'NYSE', 'Deloitte', 'EY', 'PwC'], color: '#7C3AED', lng: -74.0112, lat: 40.7074 },
+    { name: 'DUMBO / Brooklyn Tech', count: 26, cos: ['Meta', 'Amazon', 'Spotify', 'Etsy', 'Squarespace'], color: '#0D9488', lng: -73.9877, lat: 40.7033 },
+    { name: 'Flatiron / Midtown South', count: 35, cos: ['Deloitte', 'KPMG', 'EY', 'Peloton', 'Squarespace'], color: '#B45309', lng: -73.9897, lat: 40.7411 },
+    { name: 'Chelsea / Google NYC', count: 28, cos: ['Google NYC', 'Apple', 'IAC', 'Publicis'], color: '#0891B2', lng: -74.0014, lat: 40.7465 },
+    { name: 'Times Square / Midtown', count: 31, cos: ['Viacom', 'Condé Nast', 'PwC', 'NASDAQ'], color: '#DC2626', lng: -73.9855, lat: 40.7580 },
+    { name: 'Long Island City', count: 18, cos: ['JetBlue', 'Macy\'s HQ', 'Citibank Ops'], color: '#059669', lng: -73.9442, lat: 40.7447 },
+    { name: 'Park Slope / Brooklyn', count: 14, cos: ['Etsy HQ', 'WeWork', 'Vice Media'], color: '#7C3AED', lng: -73.9799, lat: 40.6782 },
+    { name: 'World Trade Center', count: 22, cos: ['American Express HQ', 'Spotify', 'Uber NYC', 'GroupM'], color: '#4F46E5', lng: -74.0134, lat: 40.7127 },
   ],
   SF: [
-    { name: 'SoMa', count: 41, cos: ['Salesforce', 'Airbnb', 'Twitter'], color: '#4F46E5', lng: -122.4016, lat: 37.7785 },
-    { name: 'Mission District', count: 28, cos: ['Lyft', 'Uber', 'DoorDash'], color: '#0D9488', lng: -122.4194, lat: 37.7599 },
-    { name: 'Financial District', count: 19, cos: ['Wells Fargo', 'Visa', 'Stripe'], color: '#DC2626', lng: -122.4015, lat: 37.7946 },
-    { name: 'Embarcadero', count: 35, cos: ['Google', 'Facebook', 'LinkedIn'], color: '#7C3AED', lng: -122.3971, lat: 37.7955 },
-    { name: 'Palo Alto', count: 24, cos: ['Apple', 'HP', 'VMware'], color: '#0891B2', lng: -122.1430, lat: 37.4419 },
-    { name: 'Mountain View', count: 38, cos: ['Google HQ', 'Mozilla', 'Intuit'], color: '#059669', lng: -122.0841, lat: 37.3861 },
-    { name: 'Menlo Park', count: 26, cos: ['Meta HQ', 'Andreessen Horowitz'], color: '#B45309', lng: -122.1817, lat: 37.4529 },
-    { name: 'South SF', count: 15, cos: ['Genentech', 'Gilead', 'BioMarin'], color: '#7C3AED', lng: -122.4058, lat: 37.6547 },
+    { name: 'SoMa', count: 45, cos: ['Salesforce HQ', 'Airbnb HQ', 'Twitter/X', 'Dropbox', 'Lyft'], color: '#4F46E5', lng: -122.4016, lat: 37.7785 },
+    { name: 'Mission District', count: 30, cos: ['Uber HQ', 'DoorDash HQ', 'Lyft', 'Pinterest'], color: '#0D9488', lng: -122.4194, lat: 37.7599 },
+    { name: 'Financial District SF', count: 22, cos: ['Wells Fargo HQ', 'Visa HQ', 'Stripe', 'First Republic'], color: '#DC2626', lng: -122.4015, lat: 37.7946 },
+    { name: 'Embarcadero / Pier', count: 38, cos: ['Gap HQ', 'Facebook SF', 'LinkedIn SF'], color: '#7C3AED', lng: -122.3971, lat: 37.7955 },
+    { name: 'Palo Alto', count: 28, cos: ['Apple Corp', 'HP Inc HQ', 'VMware', 'IDEO', 'Palantir'], color: '#0891B2', lng: -122.1430, lat: 37.4419 },
+    { name: 'Mountain View (Googleplex)', count: 42, cos: ['Google HQ', 'Mozilla HQ', 'Intuit HQ', 'Microsoft MTV'], color: '#059669', lng: -122.0841, lat: 37.3861 },
+    { name: 'Menlo Park', count: 29, cos: ['Meta HQ', 'Andreessen Horowitz', 'Sequoia Capital'], color: '#B45309', lng: -122.1817, lat: 37.4529 },
+    { name: 'South SF (Biotech)', count: 18, cos: ['Genentech HQ', 'Gilead Sciences', 'BioMarin'], color: '#7C3AED', lng: -122.4058, lat: 37.6547 },
+    { name: 'Sunnyvale', count: 32, cos: ['Yahoo HQ', 'LinkedIn HQ', 'Juniper Networks', 'NetApp'], color: '#DC2626', lng: -122.0308, lat: 37.3688 },
+    { name: 'Santa Clara', count: 36, cos: ['NVIDIA HQ', 'Intel HQ', 'Applied Materials', 'ServiceNow'], color: '#4F46E5', lng: -121.9552, lat: 37.3541 },
+    { name: 'Cupertino', count: 40, cos: ['Apple HQ (Apple Park)', 'De Anza College Ops'], color: '#0891B2', lng: -122.0322, lat: 37.3230 },
+    { name: 'San Jose Downtown', count: 20, cos: ['Adobe HQ', 'Cisco HQ', 'eBay HQ', 'PayPal HQ'], color: '#059669', lng: -121.8863, lat: 37.3382 },
+    { name: 'Redwood City', count: 16, cos: ['Oracle HQ', 'Electronic Arts HQ', 'Box HQ'], color: '#B45309', lng: -122.2477, lat: 37.4848 },
   ],
   Chicago: [
-    { name: 'The Loop', count: 31, cos: ['Deloitte', 'Accenture', 'Kraft'], color: '#4F46E5', lng: -87.6298, lat: 41.8827 },
-    { name: 'River North', count: 24, cos: ['Trading Firms', 'Morningstar'], color: '#DC2626', lng: -87.6344, lat: 41.8932 },
-    { name: 'West Loop', count: 17, cos: ['Grubhub', 'Motorola', 'McDonald\'s'], color: '#0D9488', lng: -87.6516, lat: 41.8836 },
-    { name: 'Fulton Market', count: 13, cos: ['Google Chicago', 'McDonald\'s HQ'], color: '#7C3AED', lng: -87.6524, lat: 41.8864 },
-    { name: 'Streeterville', count: 11, cos: ['Abbott', 'Tribune Media', 'Aon'], color: '#B45309', lng: -87.6162, lat: 41.8942 },
-    { name: 'Oak Brook', count: 9, cos: ['McDonald\'s', 'Ace Hardware', 'Inland'], color: '#059669', lng: -87.9484, lat: 41.8500 },
+    { name: 'The Loop', count: 34, cos: ['Deloitte', 'Accenture', 'United Airlines HQ', 'Boeing HQ'], color: '#4F46E5', lng: -87.6298, lat: 41.8827 },
+    { name: 'River North', count: 26, cos: ['Morningstar HQ', 'Groupon HQ', 'Trading Firms'], color: '#DC2626', lng: -87.6344, lat: 41.8932 },
+    { name: 'West Loop / Fulton Market', count: 22, cos: ['Google Chicago', 'McDonald\'s HQ', 'Grubhub HQ'], color: '#0D9488', lng: -87.6516, lat: 41.8836 },
+    { name: 'Streeterville / Mag Mile', count: 14, cos: ['Abbott HQ', 'Aon HQ', 'Tribune Media'], color: '#B45309', lng: -87.6162, lat: 41.8942 },
+    { name: 'Oak Brook', count: 11, cos: ['McDonald\'s World HQ', 'Ace Hardware', 'Inland Western'], color: '#059669', lng: -87.9484, lat: 41.8500 },
+    { name: 'Deerfield / North Shore', count: 9, cos: ['Walgreens Boots HQ', 'Baxter International', 'Mondelez'], color: '#7C3AED', lng: -87.8406, lat: 42.1725 },
+    { name: 'Schaumburg', count: 8, cos: ['Motorola Solutions HQ', 'Zurich NA HQ', 'Discover Financial'], color: '#0891B2', lng: -88.0834, lat: 42.0334 },
+    { name: 'Downers Grove', count: 7, cos: ['Dover Corp HQ', 'Advocate Health', 'Midway Airlines'], color: '#DC2626', lng: -88.0112, lat: 41.8078 },
   ],
   Seattle: [
-    { name: 'South Lake Union', count: 45, cos: ['Amazon', 'Microsoft', 'Boeing'], color: '#4F46E5', lng: -122.3365, lat: 47.6254 },
-    { name: 'Capitol Hill', count: 16, cos: ['Starbucks', 'Nordstrom'], color: '#0D9488', lng: -122.3148, lat: 47.6253 },
-    { name: 'Redmond', count: 38, cos: ['Microsoft HQ', 'Nintendo America'], color: '#DC2626', lng: -122.1215, lat: 47.6740 },
-    { name: 'Bellevue', count: 22, cos: ['T-Mobile', 'Expedia', 'Valve'], color: '#7C3AED', lng: -122.2015, lat: 47.6101 },
-    { name: 'Fremont', count: 14, cos: ['Google Seattle', 'Adobe', 'Tableau'], color: '#B45309', lng: -122.3500, lat: 47.6512 },
-    { name: 'SODO', count: 11, cos: ['Starbucks HQ', 'Concur', 'Rover'], color: '#059669', lng: -122.3301, lat: 47.5793 },
+    { name: 'South Lake Union', count: 48, cos: ['Amazon HQ', 'Google Seattle', 'Facebook Seattle', 'Tableau'], color: '#4F46E5', lng: -122.3365, lat: 47.6254 },
+    { name: 'Capitol Hill', count: 18, cos: ['Starbucks HQ', 'Nordstrom HQ', 'Alaska Airlines Ops'], color: '#0D9488', lng: -122.3148, lat: 47.6253 },
+    { name: 'Redmond', count: 42, cos: ['Microsoft HQ', 'Nintendo of America HQ'], color: '#DC2626', lng: -122.1215, lat: 47.6740 },
+    { name: 'Bellevue', count: 26, cos: ['T-Mobile HQ', 'Expedia HQ', 'Valve HQ', 'Concur'], color: '#7C3AED', lng: -122.2015, lat: 47.6101 },
+    { name: 'Fremont / Ballard', count: 16, cos: ['Google Seattle HQ', 'Adobe Seattle', 'Tableau'], color: '#B45309', lng: -122.3500, lat: 47.6512 },
+    { name: 'SODO', count: 13, cos: ['Starbucks Roastery', 'REI HQ', 'Alaska Airlines HQ'], color: '#059669', lng: -122.3301, lat: 47.5793 },
+    { name: 'Issaquah / Sammamish', count: 10, cos: ['Costco HQ', 'Zillow HQ', 'Microsoft Ops'], color: '#0891B2', lng: -122.0326, lat: 47.5301 },
+    { name: 'Bothell', count: 8, cos: ['Boeing Commercial HQ', 'Philips Healthcare', 'FLIR Systems'], color: '#DC2626', lng: -122.2048, lat: 47.7601 },
   ],
   Austin: [
-    { name: 'Downtown Austin', count: 27, cos: ['Dell', 'Apple', 'Tesla'], color: '#4F46E5', lng: -97.7431, lat: 30.2672 },
-    { name: 'The Domain', count: 33, cos: ['Google', 'Amazon', 'Indeed'], color: '#0D9488', lng: -97.7214, lat: 30.4012 },
-    { name: 'East Austin', count: 14, cos: ['Oracle', 'Bumble', 'Indeed'], color: '#DC2626', lng: -97.7200, lat: 30.2630 },
-    { name: 'Gigafactory Area', count: 19, cos: ['Tesla', 'Samsung Austin'], color: '#7C3AED', lng: -97.6200, lat: 30.2200 },
-    { name: 'Cedar Park', count: 11, cos: ['Apple Campus', '3M', 'Polycom'], color: '#B45309', lng: -97.8203, lat: 30.5052 },
+    { name: 'Downtown Austin', count: 30, cos: ['Dell Technologies HQ', 'Apple Austin', 'Tesla Austin'], color: '#4F46E5', lng: -97.7431, lat: 30.2672 },
+    { name: 'The Domain', count: 36, cos: ['Google Austin', 'Amazon Austin', 'Indeed HQ', 'HomeAway'], color: '#0D9488', lng: -97.7214, lat: 30.4012 },
+    { name: 'East Austin / Mueller', count: 16, cos: ['Oracle Austin HQ', 'Bumble HQ', 'Indeed'], color: '#DC2626', lng: -97.7200, lat: 30.2630 },
+    { name: 'Gigafactory / Del Valle', count: 22, cos: ['Tesla Gigafactory Texas', 'Samsung Austin Semiconductor'], color: '#7C3AED', lng: -97.6200, lat: 30.2200 },
+    { name: 'Cedar Park / Round Rock', count: 14, cos: ['Apple Campus 2', 'Dell Round Rock', '3M Austin'], color: '#B45309', lng: -97.8203, lat: 30.5052 },
+    { name: 'South Lamar / SoCo', count: 10, cos: ['Whole Foods HQ', 'Kendra Scott HQ', 'BigCommerce'], color: '#059669', lng: -97.7561, lat: 30.2441 },
+    { name: 'North Austin / Parmer Lane', count: 12, cos: ['IBM Austin', 'NXP Semiconductors', 'Flextronics'], color: '#0891B2', lng: -97.7026, lat: 30.4300 },
   ],
   Boston: [
-    { name: 'Back Bay', count: 22, cos: ['Fidelity', 'State Street', 'Putnam'], color: '#DC2626', lng: -71.0845, lat: 42.3503 },
-    { name: 'Cambridge', count: 19, cos: ['HubSpot', 'Wayfair', 'Biogen'], color: '#4F46E5', lng: -71.1056, lat: 42.3736 },
-    { name: 'Seaport', count: 15, cos: ['Liberty Mutual', 'Raytheon', 'PTC'], color: '#0D9488', lng: -71.0444, lat: 42.3516 },
-    { name: 'Longwood Medical', count: 11, cos: ['Vertex', 'Moderna', 'Biogen'], color: '#7C3AED', lng: -71.1061, lat: 42.3368 },
-    { name: 'Kendall Square', count: 24, cos: ['Google', 'MIT Spinoffs', 'Sanofi'], color: '#B45309', lng: -71.0892, lat: 42.3626 },
-    { name: 'Waltham', count: 9, cos: ['Brandeis', 'Constant Contact', 'TripAdvisor'], color: '#059669', lng: -71.2356, lat: 42.3765 },
+    { name: 'Back Bay / Copley', count: 24, cos: ['Fidelity HQ', 'State Street HQ', 'Liberty Mutual HQ'], color: '#DC2626', lng: -71.0845, lat: 42.3503 },
+    { name: 'Kendall Square / Cambridge', count: 32, cos: ['Google Cambridge', 'MIT spinoffs', 'Sanofi', 'Biogen'], color: '#4F46E5', lng: -71.0892, lat: 42.3626 },
+    { name: 'Seaport Innovation District', count: 18, cos: ['Raytheon Technologies', 'PTC HQ', 'WeWork Seaport'], color: '#0D9488', lng: -71.0444, lat: 42.3516 },
+    { name: 'Longwood Medical Area', count: 14, cos: ['Vertex Pharma HQ', 'Moderna HQ', 'Biogen HQ'], color: '#7C3AED', lng: -71.1061, lat: 42.3368 },
+    { name: 'Waltham / Route 128', count: 12, cos: ['TripAdvisor HQ', 'Constant Contact', 'Brandeis Ops'], color: '#B45309', lng: -71.2356, lat: 42.3765 },
+    { name: 'Downtown Boston', count: 20, cos: ['Wayfair HQ', 'HubSpot HQ', 'DraftKings HQ'], color: '#059669', lng: -71.0589, lat: 42.3601 },
+    { name: 'Burlington / Woburn', count: 10, cos: ['Nuance Communications', 'Kronos HQ', 'Lahey Health'], color: '#0891B2', lng: -71.1956, lat: 42.5048 },
   ],
   LA: [
-    { name: 'Santa Monica', count: 29, cos: ['Snap', 'Hulu', 'Activision'], color: '#4F46E5', lng: -118.4912, lat: 34.0195 },
-    { name: 'Downtown LA', count: 22, cos: ['KPMG', 'Deloitte', 'City National'], color: '#DC2626', lng: -118.2437, lat: 34.0522 },
-    { name: 'Culver City', count: 18, cos: ['Apple TV+', 'Amazon Studios', 'Sony'], color: '#7C3AED', lng: -118.3965, lat: 34.0211 },
-    { name: 'El Segundo', count: 24, cos: ['SpaceX', 'Northrop Grumman', 'Raytheon'], color: '#0891B2', lng: -118.4165, lat: 33.9192 },
-    { name: 'West Hollywood', count: 16, cos: ['Riot Games', 'Warner Music', 'Netflix'], color: '#0D9488', lng: -118.3617, lat: 34.0900 },
-    { name: 'Playa Vista', count: 21, cos: ['Google', 'YouTube', 'Facebook'], color: '#B45309', lng: -118.4270, lat: 33.9775 },
-    { name: 'Burbank', count: 13, cos: ['Disney', 'Warner Bros', 'NBC'], color: '#059669', lng: -118.3089, lat: 34.1808 },
+    { name: 'Santa Monica / Venice', count: 32, cos: ['Snap HQ', 'Hulu', 'Activision Blizzard', 'Google Venice'], color: '#4F46E5', lng: -118.4912, lat: 34.0195 },
+    { name: 'Downtown LA', count: 24, cos: ['KPMG', 'Deloitte LA', 'City National Bank HQ', 'Live Nation'], color: '#DC2626', lng: -118.2437, lat: 34.0522 },
+    { name: 'Culver City', count: 20, cos: ['Apple TV+ HQ', 'Amazon Studios HQ', 'Sony Pictures HQ'], color: '#7C3AED', lng: -118.3965, lat: 34.0211 },
+    { name: 'El Segundo / Hawthorne', count: 26, cos: ['SpaceX HQ', 'Northrop Grumman HQ', 'Raytheon LA'], color: '#0891B2', lng: -118.4165, lat: 33.9192 },
+    { name: 'West Hollywood / WeHo', count: 18, cos: ['Riot Games HQ', 'Warner Music HQ', 'Netflix LA'], color: '#0D9488', lng: -118.3617, lat: 34.0900 },
+    { name: 'Playa Vista', count: 24, cos: ['Google LA HQ', 'YouTube', 'Facebook LA', 'Microsoft LA'], color: '#B45309', lng: -118.4270, lat: 33.9775 },
+    { name: 'Burbank / Studio City', count: 16, cos: ['Disney HQ', 'Warner Bros HQ', 'NBC Universal', 'Netflix Burbank'], color: '#059669', lng: -118.3089, lat: 34.1808 },
+    { name: 'Century City / Westwood', count: 14, cos: ['CAA HQ', 'Fox Corp', 'WME', 'UTA'], color: '#DC2626', lng: -118.4165, lat: 34.0522 },
+    { name: 'Manhattan Beach', count: 10, cos: ['Chevron LA', 'Skechers HQ', 'DraftKings LA'], color: '#7C3AED', lng: -118.4195, lat: 33.8847 },
   ],
+  // New cities
+  Miami: [
+    { name: 'Brickell / Financial District', count: 24, cos: ['Citadel HQ', 'BlackRock Miami', 'JPMorgan Miami', 'Softbank LA'], color: '#4F46E5', lng: -80.1918, lat: 25.7617 },
+    { name: 'Wynwood / Midtown', count: 18, cos: ['Microsoft Miami', 'Google Miami', 'Spotify Miami'], color: '#0D9488', lng: -80.1993, lat: 25.8026 },
+    { name: 'Miami Beach / South Beach', count: 12, cos: ['WeWork', 'Twitter Miami', 'Founders Fund'], color: '#DC2626', lng: -80.1300, lat: 25.7907 },
+    { name: 'Doral / Airport Area', count: 10, cos: ['Carnival Corp HQ', 'Lennar HQ', 'World Fuel Services'], color: '#7C3AED', lng: -80.3544, lat: 25.8154 },
+  ],
+  Dallas: [
+    { name: 'Uptown / Victory Park', count: 28, cos: ['AT&T HQ', 'Goldman Sachs Dallas', 'JPMorgan Dallas'], color: '#4F46E5', lng: -96.8063, lat: 32.7948 },
+    { name: 'Las Colinas / Irving', count: 22, cos: ['ExxonMobil HQ', 'Celanese HQ', 'Fluor HQ'], color: '#DC2626', lng: -97.0036, lat: 32.8776 },
+    { name: 'Plano / North Dallas', count: 30, cos: ['Toyota NA HQ', 'JPMorgan Chase Ops', 'FedEx Ground HQ', 'Capital One Dallas'], color: '#0D9488', lng: -96.6989, lat: 33.0198 },
+    { name: 'Frisco / Allen', count: 16, cos: ['Liberty Mutual Dallas', 'Keurig Dr Pepper HQ', 'Stonebriar'], color: '#7C3AED', lng: -96.8219, lat: 33.1507 },
+    { name: 'Downtown Dallas', count: 20, cos: ['Bank of America Dallas', 'PwC Dallas', 'Deloitte Dallas', 'American Airlines HQ'], color: '#B45309', lng: -96.7970, lat: 32.7767 },
+    { name: 'Fort Worth', count: 14, cos: ['American Airlines HQ (DFW)', 'BNSF Railway HQ', 'D.R. Horton HQ'], color: '#059669', lng: -97.3308, lat: 32.7555 },
+  ],
+  Denver: [
+    { name: 'LoDo / Downtown Denver', count: 20, cos: ['Google Denver', 'Salesforce Denver', 'Arrow Electronics HQ'], color: '#4F46E5', lng: -104.9903, lat: 39.7392 },
+    { name: 'RiNo / Five Points', count: 14, cos: ['Slack Denver', 'Workday Denver', 'SendGrid HQ'], color: '#0D9488', lng: -104.9719, lat: 39.7644 },
+    { name: 'Tech Center / Greenwood Village', count: 18, cos: ['Oracle Denver', 'DISH Network HQ', 'Lockheed Martin Denver'], color: '#DC2626', lng: -104.8897, lat: 39.6128 },
+    { name: 'Boulder', count: 16, cos: ['Google Boulder', 'Salesforce Boulder', 'Rally Software', 'Zayo Group HQ'], color: '#7C3AED', lng: -105.2705, lat: 40.0150 },
+  ],
+  DC: [
+    { name: 'Downtown DC / K Street', count: 28, cos: ['Booz Allen Hamilton HQ', 'Deloitte DC', 'McKinsey DC', 'SAIC HQ'], color: '#4F46E5', lng: -77.0369, lat: 38.9072 },
+    { name: 'Tysons Corner / McLean', count: 24, cos: ['Freddie Mac HQ', 'Capital One HQ', 'Leidos HQ', 'DXC Technology'], color: '#DC2626', lng: -77.2311, lat: 38.9187 },
+    { name: 'Arlington / Rosslyn', count: 20, cos: ['Amazon HQ2', 'Boeing HQ', 'Nestle USA HQ', 'Lidl US HQ'], color: '#0D9488', lng: -77.0841, lat: 38.8816 },
+    { name: 'Reston / Herndon', count: 16, cos: ['Leidos HQ', 'DXC Technology', 'Neustar HQ', 'Volkswagen Group of America'], color: '#7C3AED', lng: -77.3564, lat: 38.9687 },
+    { name: 'Bethesda / Chevy Chase', count: 12, cos: ['Marriott HQ', 'Host Hotels HQ', 'Lockheed Martin Corp HQ'], color: '#B45309', lng: -77.1006, lat: 38.9807 },
+  ],
+  Houston: [
+    { name: 'Energy Corridor', count: 24, cos: ['Shell USA HQ', 'BP America HQ', 'ConocoPhillips HQ', 'Sysco HQ'], color: '#4F46E5', lng: -95.6315, lat: 29.7826 },
+    { name: 'Greenway Plaza / Galleria', count: 18, cos: ['Chevron Houston', 'Halliburton HQ', 'Baker Hughes HQ'], color: '#DC2626', lng: -95.4739, lat: 29.7375 },
+    { name: 'Downtown Houston', count: 22, cos: ['JPMorgan Houston', 'Deloitte Houston', 'EY Houston', 'Waste Management HQ'], color: '#0D9488', lng: -95.3698, lat: 29.7604 },
+    { name: 'The Woodlands', count: 14, cos: ['ExxonMobil HQ', 'Aon Houston', 'McKesson HQ'], color: '#7C3AED', lng: -95.5102, lat: 30.1658 },
+  ],
+  Minneapolis: [
+    { name: 'Downtown Minneapolis', count: 22, cos: ['Target HQ', 'US Bank HQ', 'Wells Fargo Minneapolis', 'Ameriprise HQ'], color: '#4F46E5', lng: -93.2650, lat: 44.9778 },
+    { name: 'Bloomington / Eden Prairie', count: 16, cos: ['Best Buy HQ', 'Toro Company HQ', 'General Mills HQ'], color: '#DC2626', lng: -93.3698, lat: 44.8408 },
+    { name: 'St. Paul', count: 12, cos: ['3M HQ', 'Ecolab HQ', 'Securian Financial HQ'], color: '#0D9488', lng: -93.0900, lat: 44.9537 },
+  ],
+  Charlotte: [
+    { name: 'Uptown Charlotte', count: 20, cos: ['Bank of America HQ', 'Wells Fargo Ops', 'Truist HQ', 'Lowe\'s HQ'], color: '#4F46E5', lng: -80.8431, lat: 35.2271 },
+    { name: 'South End / Dilworth', count: 14, cos: ['Red Ventures HQ', 'LendingTree HQ', 'AvidXchange HQ'], color: '#0D9488', lng: -80.8568, lat: 35.2130 },
+    { name: 'Ballantyne / South Charlotte', count: 12, cos: ['MetLife Charlotte', 'Synchrony', 'SPX Corporation HQ'], color: '#DC2626', lng: -80.8520, lat: 35.0527 },
+  ],
+  Nashville: [
+    { name: 'Downtown Nashville', count: 18, cos: ['HCA Healthcare HQ', 'Dollar General HQ', 'Asurion HQ'], color: '#4F46E5', lng: -86.7816, lat: 36.1627 },
+    { name: 'Brentwood / Cool Springs', count: 14, cos: ['Tractor Supply HQ', 'Genesco HQ', 'iHeart Media'], color: '#DC2626', lng: -86.7928, lat: 36.0331 },
+    { name: 'Midtown / Music Row', count: 10, cos: ['Amazon Nashville', 'Deloitte Nashville', 'UBS Nashville'], color: '#0D9488', lng: -86.7984, lat: 36.1530 },
+  ],
+  Phoenix: [
+    { name: 'Downtown Phoenix', count: 16, cos: ['Intel Phoenix', 'Banner Health HQ', 'Republic Services HQ'], color: '#4F46E5', lng: -112.0740, lat: 33.4484 },
+    { name: 'Scottsdale / Old Town', count: 14, cos: ['GoDaddy HQ', 'Charles Schwab HQ', 'Discount Tire HQ'], color: '#DC2626', lng: -111.9261, lat: 33.4942 },
+    { name: 'Tempe / Mesa', count: 12, cos: ['Apple Tempe', 'State Farm Phoenix HQ', 'Microchip Technology HQ'], color: '#0D9488', lng: -111.9400, lat: 33.4255 },
+    { name: 'Chandler / Gilbert', count: 10, cos: ['Intel Chandler HQ', 'Wells Fargo Chandler Ops', 'PayPal Phoenix'], color: '#7C3AED', lng: -111.8413, lat: 33.3062 },
+  ],
+  Raleigh: [
+    { name: 'Downtown Raleigh / Research Triangle', count: 18, cos: ['IBM RTP', 'Cisco RTP', 'Red Hat HQ', 'SAS Institute HQ'], color: '#4F46E5', lng: -78.6382, lat: 35.7796 },
+    { name: 'Durham / Chapel Hill', count: 14, cos: ['Duke University Ops', 'Quintiles HQ', 'GlaxoSmithKline RTP'], color: '#DC2626', lng: -78.8986, lat: 35.9940 },
+    { name: 'Cary / Morrisville', count: 12, cos: ['SAS Institute', 'Bandwidth HQ', 'Epic Games HQ'], color: '#0D9488', lng: -78.7811, lat: 35.7915 },
+  ],
+
   London: [
     { name: 'Canary Wharf', count: 44, cos: ['HSBC', 'Barclays', 'JPMorgan'], color: '#4F46E5', lng: -0.0235, lat: 51.5054 },
     { name: 'City of London', count: 38, cos: ['Goldman Sachs', 'Morgan Stanley', 'BlackRock'], color: '#DC2626', lng: -0.0922, lat: 51.5155 },
@@ -164,13 +253,36 @@ const CITY_FRIENDS: Record<string, { name: string; init: string; color: string; 
   SF: [{ name: 'Maya J.', init: 'MJ', color: '#4F46E5', lng: -122.4050, lat: 37.7800 }],
   Seattle: [{ name: 'Kai N.', init: 'KN', color: '#4F46E5', lng: -122.3380, lat: 47.6270 }],
   Chicago: [], Austin: [], Boston: [], LA: [],
+  Miami: [], Dallas: [], Denver: [], DC: [], Houston: [],
+  Minneapolis: [], Charlotte: [], Nashville: [], Phoenix: [], Raleigh: [],
   London: [], Toronto: [], Dubai: [], Singapore: [], Tokyo: [], Sydney: [], Berlin: [],
 };
+
+interface SearchResult {
+  id: string;
+  name: string;
+  address: string;
+  lng: number;
+  lat: number;
+}
+
+interface DroppedHotspot {
+  name: string;
+  coords: [number, number];
+  live: boolean;
+  time: string;
+  vibes: string[];
+  note: string;
+  attire: string;
+  groupChat: boolean;
+  chatId?: string;
+}
 
 export default function MapPage() {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
+  const searchTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigate = useNavigate();
 
   const [mode, setMode] = useState<MapMode>('offices');
@@ -178,21 +290,45 @@ export default function MapPage() {
   const [selectedPod, setSelectedPod] = useState<string | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
   const [selectedHotspot, setSelectedHotspot] = useState<string | null>(null);
+  const [selectedDropped, setSelectedDropped] = useState<DroppedHotspot | null>(null);
   const [mapReady, setMapReady] = useState(false);
-  const { rsvped, addRsvp } = useAppContext();
+  const { rsvped, addRsvp, addHotspotChat } = useAppContext();
+
+  // Drop hotspot form state
   const [showDropForm, setShowDropForm] = useState(false);
   const [hotspotName, setHotspotName] = useState('');
-  const [droppedHotspots, setDroppedHotspots] = useState<{ name: string; coords: [number, number] }[]>([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [selectedPlace, setSelectedPlace] = useState<SearchResult | null>(null);
+  const [hotspotVibes, setHotspotVibes] = useState<string[]>([]);
+  const [hotspotLive, setHotspotLive] = useState(true);
+  const [hotspotTime, setHotspotTime] = useState('');
+  const [hotspotNote, setHotspotNote] = useState('');
+  const [hotspotAttire, setHotspotAttire] = useState('');
+  const [hotspotGroupChat, setHotspotGroupChat] = useState(false);
+  const [droppedHotspots, setDroppedHotspots] = useState<DroppedHotspot[]>([]);
 
   const allCityEvents = Object.values(CITY_EVENTS).flat();
   const activePodData = selectedPod ? CITY_PODS[selectedCity]?.find(p => p.name === selectedPod) : null;
   const activeEvent = allCityEvents.find(e => e.id === selectedEvent);
   const activeHotspot = hotspots.find(h => h.id === selectedHotspot);
 
+  const resetDropForm = () => {
+    setHotspotName('');
+    setSelectedPlace(null);
+    setSearchResults([]);
+    setHotspotVibes([]);
+    setHotspotLive(true);
+    setHotspotTime('');
+    setHotspotNote('');
+    setHotspotAttire('');
+    setHotspotGroupChat(false);
+  };
+
   const closeAll = () => {
     setSelectedPod(null);
     setSelectedEvent(null);
     setSelectedHotspot(null);
+    setSelectedDropped(null);
     setShowDropForm(false);
   };
 
@@ -287,26 +423,90 @@ export default function MapPage() {
 
       droppedHotspots.forEach(hs => {
         const el = document.createElement('div');
-        el.innerHTML = `<div style="width:34px;height:34px;border-radius:50%;background:#4F46E5;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 2px 8px rgba(79,70,229,0.3);font-size:16px">⭐</div>`;
+        el.style.cssText = `display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer`;
+        el.innerHTML = `
+          <div style="position:relative;width:38px;height:38px;border-radius:50%;background:${hs.live ? '#22C55E' : '#4F46E5'};display:flex;align-items:center;justify-content:center;border:2.5px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,0.2);font-size:16px">
+            ${hs.live ? '🟢' : '⭐'}
+            ${hs.live ? '<div style="position:absolute;top:-1px;right:-1px;width:11px;height:11px;border-radius:50%;background:#22C55E;border:2px solid #fff"></div>' : ''}
+          </div>
+          <div style="background:#fff;border-radius:50px;padding:1px 7px;font-size:9px;font-weight:600;color:#111;box-shadow:0 1px 4px rgba(0,0,0,0.1);white-space:nowrap;max-width:80px;overflow:hidden;text-overflow:ellipsis">${hs.name}</div>`;
+        el.onclick = () => { closeAll(); setSelectedDropped(hs); };
         markersRef.current.push(new mapboxgl.Marker({ element: el }).setLngLat(hs.coords).addTo(map.current!));
       });
     }
   }, [mode, mapReady, selectedCity, droppedHotspots]);
 
-  const handleRsvp = (eventId: string) => {
-    addRsvp(eventId);
+  const searchPlaces = async (query: string) => {
+    if (!query.trim() || query.length < 3) { setSearchResults([]); return; }
+    if (searchTimeout.current) clearTimeout(searchTimeout.current);
+    searchTimeout.current = setTimeout(async () => {
+      const center = CITY_COORDS[selectedCity];
+      const proximity = `${center[0]},${center[1]}`;
+      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json?access_token=${mapboxgl.accessToken}&proximity=${proximity}&limit=5&types=poi,address,place`;
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        setSearchResults(data.features.map((f: any) => ({
+          id: f.id,
+          name: f.text,
+          address: f.place_name,
+          lng: f.center[0],
+          lat: f.center[1],
+        })));
+      } catch (e) {
+        console.error('Geocoding error', e);
+      }
+    }, 300);
   };
 
+  const selectPlace = (place: SearchResult) => {
+    setSelectedPlace(place);
+    setHotspotName(place.name);
+    setSearchResults([]);
+    map.current?.flyTo({ center: [place.lng, place.lat], zoom: 15, duration: 600 });
+  };
+
+  const handleRsvp = (eventId: string) => addRsvp(eventId);
+
   const handleDropHotspot = () => {
-    if (!hotspotName.trim()) return;
-    const center = CITY_COORDS[selectedCity];
-    const coords: [number, number] = [
-      center[0] + (Math.random() - 0.5) * 0.02,
-      center[1] + (Math.random() - 0.5) * 0.02,
-    ];
-    setDroppedHotspots(prev => [...prev, { name: hotspotName, coords }]);
-    setHotspotName('');
+    if (!selectedPlace) return;
+    const hotspotId = `hotspot-${Date.now()}`;
+    const newHotspot: DroppedHotspot = {
+      name: selectedPlace.name,
+      coords: [selectedPlace.lng, selectedPlace.lat],
+      live: hotspotLive,
+      time: hotspotTime,
+      vibes: hotspotVibes,
+      note: hotspotNote,
+      attire: hotspotAttire,
+      groupChat: hotspotGroupChat,
+      chatId: hotspotId,
+    };
+    setDroppedHotspots(prev => [...prev, newHotspot]);
+
+    if (hotspotGroupChat) {
+      addHotspotChat({
+        id: hotspotId,
+        name: `${selectedPlace.name} Hangout`,
+        emoji: hotspotLive ? '🟢' : '📍',
+        members: 1,
+        last: hotspotNote || `${hotspotLive ? 'Happening now' : 'Tonight' + (hotspotTime ? ' at ' + hotspotTime : '')}`,
+        time: 'now',
+        unread: 0,
+        joined: true,
+        msgs: [
+          { s: 'System', t: `📍 Welcome to the ${selectedPlace.name} hangout chat!`, self: false, time: 'now' },
+          ...(hotspotNote ? [{ s: 'You', t: hotspotNote, self: true, time: 'now' }] : []),
+        ],
+      });
+    }
+
+    resetDropForm();
     setShowDropForm(false);
+  };
+
+  const toggleVibe = (tag: string) => {
+    setHotspotVibes(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]);
   };
 
   return (
@@ -349,7 +549,7 @@ export default function MapPage() {
         </button>
 
         {mode === 'explore' && (
-          <button onClick={() => setShowDropForm(true)}
+          <button onClick={() => { resetDropForm(); setShowDropForm(true); }}
             style={{ position: 'absolute', bottom: 24, left: 16, zIndex: 10, display: 'flex', alignItems: 'center', gap: '6px', background: '#111', color: '#fff', border: 'none', borderRadius: '50px', padding: '12px 18px', fontSize: '14px', fontWeight: '600', cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.2)' }}>
             <Plus style={{ width: '16px', height: '16px' }} />
             Drop a Hotspot
@@ -360,24 +560,193 @@ export default function MapPage() {
         <AnimatePresence>
           {showDropForm && (
             <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', damping: 25 }}
-              style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 50, background: '#fff', borderRadius: '20px 20px 0 0', padding: '20px', boxShadow: '0 -4px 24px rgba(0,0,0,0.1)' }}>
+              style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 50, background: '#fff', borderRadius: '20px 20px 0 0', padding: '20px', maxHeight: '88%', overflowY: 'auto', boxShadow: '0 -4px 24px rgba(0,0,0,0.1)' }}>
+
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                 <div style={{ fontSize: '17px', fontWeight: '700', color: '#111' }}>Drop a Hotspot</div>
-                <button onClick={() => setShowDropForm(false)} style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#F5F5F5', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <button onClick={() => { setShowDropForm(false); resetDropForm(); }}
+                  style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#F5F5F5', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <X style={{ width: '16px', height: '16px', color: '#111' }} />
                 </button>
               </div>
+
+              {/* Place search */}
               <div style={{ marginBottom: '12px' }}>
-                <label style={{ fontSize: '13px', fontWeight: '600', color: '#111', display: 'block', marginBottom: '6px' }}>Venue name</label>
-                <input value={hotspotName} onChange={e => setHotspotName(e.target.value)}
-                  onKeyDown={e => e.key === 'Enter' && handleDropHotspot()}
-                  placeholder="e.g. Piedmont Park, Krog Street..."
-                  style={{ width: '100%', height: '44px', border: '1.5px solid #E5E5E5', borderRadius: '12px', padding: '0 14px', fontSize: '14px', color: '#111', outline: 'none', fontFamily: 'Inter, system-ui, sans-serif' }} />
+                <label style={{ fontSize: '13px', fontWeight: '600', color: '#111', display: 'block', marginBottom: '6px' }}>📍 Place</label>
+                <input value={hotspotName}
+                  onChange={e => { setHotspotName(e.target.value); setSelectedPlace(null); searchPlaces(e.target.value); }}
+                  placeholder="e.g. Piedmont Park, Lenox Mall, Krog Street..."
+                  style={{ width: '100%', height: '44px', border: '1.5px solid #E5E5E5', borderRadius: '12px', padding: '0 14px', fontSize: '14px', color: '#111', outline: 'none', fontFamily: 'Inter, system-ui, sans-serif' }}
+                  autoFocus />
               </div>
-              <button onClick={handleDropHotspot}
-                style={{ width: '100%', height: '46px', borderRadius: '12px', background: '#111', color: '#fff', border: 'none', cursor: 'pointer', fontSize: '15px', fontWeight: '700' }}>
-                Drop it 📍
+
+              {searchResults.length > 0 && (
+                <div style={{ border: '1px solid #F0F0F0', borderRadius: '12px', overflow: 'hidden', marginBottom: '12px' }}>
+                  {searchResults.map((result, i) => (
+                    <button key={result.id} onClick={() => selectPlace(result)}
+                      style={{ width: '100%', padding: '11px 14px', background: '#fff', border: 'none', borderBottom: i < searchResults.length - 1 ? '1px solid #F5F5F5' : 'none', cursor: 'pointer', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#F5F5F5', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '14px' }}>📍</div>
+                      <div style={{ minWidth: 0 }}>
+                        <div style={{ fontSize: '13px', fontWeight: '600', color: '#111' }}>{result.name}</div>
+                        <div style={{ fontSize: '11px', color: '#999', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{result.address}</div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {selectedPlace && (
+                <div style={{ background: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: '10px', padding: '10px 14px', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '16px' }}>✓</span>
+                  <div>
+                    <div style={{ fontSize: '13px', fontWeight: '600', color: '#16A34A' }}>{selectedPlace.name}</div>
+                    <div style={{ fontSize: '11px', color: '#16A34A', opacity: 0.8 }}>{selectedPlace.address}</div>
+                  </div>
+                </div>
+              )}
+
+              {/* Status */}
+              <div style={{ marginBottom: '12px' }}>
+                <label style={{ fontSize: '13px', fontWeight: '600', color: '#111', display: 'block', marginBottom: '8px' }}>🔴 Status</label>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <button onClick={() => setHotspotLive(true)}
+                    style={{ flex: 1, padding: '10px', borderRadius: '10px', border: '1.5px solid', borderColor: hotspotLive ? '#22C55E' : '#E5E5E5', background: hotspotLive ? '#F0FDF4' : '#fff', color: hotspotLive ? '#16A34A' : '#666', fontSize: '13px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.15s' }}>
+                    🟢 Happening now
+                  </button>
+                  <button onClick={() => setHotspotLive(false)}
+                    style={{ flex: 1, padding: '10px', borderRadius: '10px', border: '1.5px solid', borderColor: !hotspotLive ? '#111' : '#E5E5E5', background: !hotspotLive ? '#F5F5F5' : '#fff', color: !hotspotLive ? '#111' : '#666', fontSize: '13px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.15s' }}>
+                    📅 Later tonight
+                  </button>
+                </div>
+              </div>
+
+              {/* Time picker — only if later */}
+              {!hotspotLive && (
+                <div style={{ marginBottom: '12px' }}>
+                  <label style={{ fontSize: '13px', fontWeight: '600', color: '#111', display: 'block', marginBottom: '6px' }}>🕐 What time?</label>
+                  <input type="time" value={hotspotTime} onChange={e => setHotspotTime(e.target.value)}
+                    style={{ width: '100%', height: '44px', border: '1.5px solid #E5E5E5', borderRadius: '12px', padding: '0 14px', fontSize: '14px', color: '#111', outline: 'none', fontFamily: 'Inter, system-ui, sans-serif' }} />
+                </div>
+              )}
+
+              {/* Vibe tags */}
+              <div style={{ marginBottom: '12px' }}>
+                <label style={{ fontSize: '13px', fontWeight: '600', color: '#111', display: 'block', marginBottom: '8px' }}>✨ Vibe</label>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  {['🍔 Food', '🍸 Drinks', '🎵 Music', '🏋️ Fitness', '☕ Coffee', '🌿 Outdoors', '🎮 Gaming', '🛍️ Shopping', '🌃 Nightlife', '🎨 Art'].map(tag => (
+                    <button key={tag} onClick={() => toggleVibe(tag)}
+                      style={{ padding: '6px 12px', borderRadius: '50px', border: '1.5px solid', borderColor: hotspotVibes.includes(tag) ? '#111' : '#E5E5E5', background: hotspotVibes.includes(tag) ? '#111' : '#fff', color: hotspotVibes.includes(tag) ? '#fff' : '#666', fontSize: '12px', fontWeight: '500', cursor: 'pointer', transition: 'all 0.15s' }}>
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Attire */}
+              <div style={{ marginBottom: '12px' }}>
+                <label style={{ fontSize: '13px', fontWeight: '600', color: '#111', display: 'block', marginBottom: '6px' }}>
+                  👗 Attire <span style={{ fontWeight: '400', color: '#999' }}>(optional)</span>
+                </label>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '8px' }}>
+                  {['Casual', 'Business casual', 'Dressed up', 'Activewear', 'Swimwear', 'Costume'].map(a => (
+                    <button key={a} onClick={() => setHotspotAttire(hotspotAttire === a ? '' : a)}
+                      style={{ padding: '6px 12px', borderRadius: '50px', border: '1.5px solid', borderColor: hotspotAttire === a ? '#111' : '#E5E5E5', background: hotspotAttire === a ? '#111' : '#fff', color: hotspotAttire === a ? '#fff' : '#666', fontSize: '12px', fontWeight: '500', cursor: 'pointer', transition: 'all 0.15s' }}>
+                      {a}
+                    </button>
+                  ))}
+                </div>
+                <input value={hotspotAttire} onChange={e => setHotspotAttire(e.target.value)}
+                  placeholder="Or type your own... e.g. Bowling shoes, all black..."
+                  style={{ width: '100%', height: '40px', border: '1.5px solid #E5E5E5', borderRadius: '10px', padding: '0 12px', fontSize: '13px', color: '#111', outline: 'none', fontFamily: 'Inter, system-ui, sans-serif' }} />
+              </div>
+
+              {/* Note */}
+              <div style={{ marginBottom: '12px' }}>
+                <label style={{ fontSize: '13px', fontWeight: '600', color: '#111', display: 'block', marginBottom: '6px' }}>
+                  💬 Note <span style={{ fontWeight: '400', color: '#999' }}>(optional)</span>
+                </label>
+                <textarea value={hotspotNote} onChange={e => setHotspotNote(e.target.value)}
+                  placeholder="e.g. Super chill vibe, come through after work, free entry before 10..."
+                  rows={2}
+                  style={{ width: '100%', border: '1.5px solid #E5E5E5', borderRadius: '12px', padding: '10px 14px', fontSize: '13px', color: '#111', outline: 'none', fontFamily: 'Inter, system-ui, sans-serif', resize: 'none', lineHeight: '1.5' }} />
+              </div>
+
+              {/* Group chat toggle */}
+              <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 14px', background: '#F9F9F9', borderRadius: '12px', cursor: 'pointer' }} onClick={() => setHotspotGroupChat(p => !p)}>
+                <div>
+                  <div style={{ fontSize: '13px', fontWeight: '600', color: '#111' }}>💬 Create a group chat</div>
+                  <div style={{ fontSize: '11px', color: '#999', marginTop: '2px' }}>Let people who join see a group chat</div>
+                </div>
+                <div style={{ width: '44px', height: '26px', borderRadius: '50px', background: hotspotGroupChat ? '#111' : '#E5E5E5', position: 'relative', transition: 'all 0.2s', flexShrink: 0 }}>
+                  <div style={{ position: 'absolute', top: '3px', left: hotspotGroupChat ? '21px' : '3px', width: '20px', height: '20px', borderRadius: '50%', background: '#fff', transition: 'all 0.2s', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
+                </div>
+              </div>
+
+              <button onClick={handleDropHotspot} disabled={!selectedPlace}
+                style={{ width: '100%', height: '48px', borderRadius: '12px', background: selectedPlace ? '#111' : '#E5E5E5', color: selectedPlace ? '#fff' : '#999', border: 'none', cursor: selectedPlace ? 'pointer' : 'not-allowed', fontSize: '15px', fontWeight: '700', transition: 'all 0.2s' }}>
+                {selectedPlace ? `${hotspotLive ? '🟢 Drop Live —' : '📅 Drop —'} ${selectedPlace.name}` : 'Search for a place first'}
               </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Dropped hotspot detail panel */}
+        <AnimatePresence>
+          {selectedDropped && (
+            <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', damping: 25 }}
+              style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 40, background: '#fff', borderRadius: '20px 20px 0 0', padding: '20px', maxHeight: '70%', overflowY: 'auto', boxShadow: '0 -4px 24px rgba(0,0,0,0.1)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '12px' }}>
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                    {selectedDropped.live
+                      ? <span style={{ fontSize: '11px', fontWeight: '700', color: '#16A34A', background: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: '50px', padding: '2px 8px' }}>🟢 Live now</span>
+                      : <span style={{ fontSize: '11px', fontWeight: '700', color: '#666', background: '#F5F5F5', borderRadius: '50px', padding: '2px 8px' }}>📅 {selectedDropped.time || 'Tonight'}</span>
+                    }
+                  </div>
+                  <div style={{ fontSize: '18px', fontWeight: '800', color: '#111', letterSpacing: '-0.5px' }}>{selectedDropped.name}</div>
+                </div>
+                <button onClick={() => setSelectedDropped(null)} style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#F5F5F5', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <X style={{ width: '16px', height: '16px', color: '#111' }} />
+                </button>
+              </div>
+
+              {selectedDropped.vibes.length > 0 && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '12px' }}>
+                  {selectedDropped.vibes.map(v => (
+                    <span key={v} style={{ fontSize: '12px', padding: '4px 10px', borderRadius: '50px', background: '#F5F5F5', color: '#111', fontWeight: '500' }}>{v}</span>
+                  ))}
+                </div>
+              )}
+
+              {selectedDropped.attire && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#FEF3C7', borderRadius: '10px', padding: '10px 12px', marginBottom: '12px' }}>
+                  <span style={{ fontSize: '16px' }}>👗</span>
+                  <div>
+                    <div style={{ fontSize: '11px', fontWeight: '600', color: '#D97706', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Attire</div>
+                    <div style={{ fontSize: '13px', fontWeight: '600', color: '#111' }}>{selectedDropped.attire}</div>
+                  </div>
+                </div>
+              )}
+
+              {selectedDropped.note && (
+                <div style={{ background: '#F9F9F9', borderRadius: '10px', padding: '10px 12px', marginBottom: '12px' }}>
+                  <div style={{ fontSize: '11px', color: '#999', marginBottom: '3px' }}>Note from host</div>
+                  <div style={{ fontSize: '13px', color: '#111', lineHeight: '1.5' }}>{selectedDropped.note}</div>
+                </div>
+              )}
+
+              <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+                <button
+                  style={{ flex: 1, height: '46px', borderRadius: '12px', background: '#111', color: '#fff', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: '700' }}>
+                  ✓ I'm going
+                </button>
+                {selectedDropped.groupChat && (
+                  <button onClick={() => { setSelectedDropped(null); navigate('/chats'); }}
+                    style={{ flex: 1, height: '46px', borderRadius: '12px', background: '#EEF2FF', color: '#4F46E5', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: '700', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                    <MessageCircle style={{ width: '16px', height: '16px' }} /> Join Chat
+                  </button>
+                )}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

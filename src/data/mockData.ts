@@ -306,4 +306,49 @@ export const CITY_EVENTS: Record<string, CityEvent[]> = {
   Berlin: [
     { id: 'ber1', title: 'Zalando Intern Tech Meetup', company: 'Zalando', date: 'July 31', time: '6:00 PM', location: 'Zalando HQ, Mitte', tags: ['Tech', 'Fashion'], description: "Meet interns from across Berlin's tech scene.", rsvpCount: 71, lng: 13.4050, lat: 52.5200 },
   ],
+
+  Miami: [
+    { id: 'mia1', title: 'Citadel Intern Quant Summit', company: 'Citadel', date: 'July 22', time: '5:00 PM', location: 'Citadel HQ, Brickell', tags: ['Finance', 'Quant', 'Networking'], description: 'Deep dive into quantitative finance with Citadel traders and researchers.', rsvpCount: 48, lng: -80.1918, lat: 25.7617 },
+    { id: 'mia2', title: 'Microsoft Miami Intern Mixer', company: 'Microsoft', date: 'July 29', time: '6:30 PM', location: 'Wynwood Walls', tags: ['Tech', 'Social', 'Art'], description: 'Intern mixer at one of Miami\'s most iconic art destinations.', rsvpCount: 62, lng: -80.1993, lat: 25.8026 },
+    { id: 'mia3', title: 'Carnival Corp Intern Day', company: 'Carnival Corp', date: 'Aug 5', time: '10:00 AM', location: 'Carnival HQ, Doral', tags: ['Hospitality', 'Office Tour', 'Networking'], description: 'Tour Carnival\'s global headquarters and meet the executive team.', rsvpCount: 34, lng: -80.3544, lat: 25.8154 },
+  ],
+  Dallas: [
+    { id: 'dal1', title: 'AT&T Intern Innovation Day', company: 'AT&T', date: 'July 21', time: '9:00 AM', location: 'AT&T HQ, Uptown Dallas', tags: ['Tech', 'Telecom', 'Innovation'], description: 'Showcase intern projects to AT&T leadership. Prizes for top innovations.', rsvpCount: 88, lng: -96.8063, lat: 32.7948 },
+    { id: 'dal2', title: 'Toyota NA Intern Factory Tour', company: 'Toyota', date: 'July 28', time: '10:00 AM', location: 'Toyota NA HQ, Plano', tags: ['Engineering', 'Manufacturing', 'Tour'], description: 'Behind-the-scenes tour of Toyota\'s North American headquarters.', rsvpCount: 54, lng: -96.6989, lat: 33.0198 },
+    { id: 'dal3', title: 'Goldman Sachs Dallas Networking Night', company: 'Goldman Sachs', date: 'Aug 4', time: '7:00 PM', location: 'Reunion Tower, Downtown Dallas', tags: ['Finance', 'Networking', 'Views'], description: 'Networking night with stunning skyline views from Reunion Tower.', rsvpCount: 72, lng: -96.7970, lat: 32.7767 },
+  ],
+  Denver: [
+    { id: 'den1', title: 'Google Denver Intern Hike + Social', company: 'Google', date: 'July 26', time: '8:00 AM', location: 'Rocky Mountain National Park', tags: ['Outdoors', 'Social', 'Hiking'], description: 'Morning hike in the Rockies followed by a Google-hosted lunch.', rsvpCount: 45, lng: -104.9903, lat: 39.7392 },
+    { id: 'den2', title: 'DISH Network Intern Tech Demo', company: 'DISH Network', date: 'Aug 2', time: '3:00 PM', location: 'DISH HQ, Greenwood Village', tags: ['Tech', 'Demo Day', 'Engineering'], description: 'Intern project showcase at DISH\'s state-of-the-art headquarters.', rsvpCount: 38, lng: -104.8897, lat: 39.6128 },
+  ],
+  DC: [
+    { id: 'dc1', title: 'Booz Allen Intern Summit', company: 'Booz Allen Hamilton', date: 'July 23', time: '9:00 AM', location: 'Booz Allen HQ, McLean VA', tags: ['Consulting', 'Government', 'Networking'], description: 'Annual intern summit with panels from senior leadership and government partners.', rsvpCount: 120, lng: -77.0369, lat: 38.9072 },
+    { id: 'dc2', title: 'Amazon HQ2 Intern Day', company: 'Amazon', date: 'July 30', time: '10:00 AM', location: 'Amazon HQ2, Arlington VA', tags: ['Tech', 'Campus Tour', 'Networking'], description: 'Full day at Amazon\'s second headquarters with tours, talks, and activities.', rsvpCount: 156, lng: -77.0841, lat: 38.8816 },
+    { id: 'dc3', title: 'Capital One Intern Hackathon', company: 'Capital One', date: 'Aug 6', time: '9:00 AM', location: 'Capital One HQ, Tysons', tags: ['Hackathon', 'Fintech', 'Prizes'], description: '24-hour hackathon focused on the future of financial technology.', rsvpCount: 94, lng: -77.2311, lat: 38.9187 },
+  ],
+  Houston: [
+    { id: 'hou1', title: 'Shell Intern Energy Forum', company: 'Shell', date: 'July 24', time: '4:00 PM', location: 'Shell Energy Center, Houston', tags: ['Energy', 'Networking', 'Panel'], description: 'Industry panels on the future of energy and sustainability.', rsvpCount: 66, lng: -95.6315, lat: 29.7826 },
+    { id: 'hou2', title: 'NASA Johnson Space Center Tour', company: 'NASA', date: 'Aug 1', time: '9:00 AM', location: 'NASA Johnson Space Center', tags: ['Space', 'Engineering', 'Tour'], description: 'Exclusive intern access to Mission Control and astronaut training facilities.', rsvpCount: 88, lng: -95.0941, lat: 29.5593 },
+    { id: 'hou3', title: 'Halliburton Intern Networking Dinner', company: 'Halliburton', date: 'Aug 7', time: '6:30 PM', location: 'Halliburton HQ, Galleria Area', tags: ['Energy', 'Networking', 'Dinner'], description: 'Formal networking dinner with Halliburton executives and senior engineers.', rsvpCount: 42, lng: -95.4739, lat: 29.7375 },
+  ],
+  Minneapolis: [
+    { id: 'min1', title: 'Target Intern Design Summit', company: 'Target', date: 'July 25', time: '10:00 AM', location: 'Target HQ, Downtown Minneapolis', tags: ['Retail', 'Design', 'Innovation'], description: 'Behind-the-scenes look at how Target designs the future of retail.', rsvpCount: 76, lng: -93.2650, lat: 44.9778 },
+    { id: 'min2', title: 'Best Buy Intern Tech Showcase', company: 'Best Buy', date: 'Aug 3', time: '3:00 PM', location: 'Best Buy HQ, Richfield', tags: ['Tech', 'Retail', 'Demo Day'], description: 'Intern project showcase and product demos at Best Buy headquarters.', rsvpCount: 52, lng: -93.3698, lat: 44.8408 },
+  ],
+  Charlotte: [
+    { id: 'cha1', title: 'Bank of America Intern Finance Forum', company: 'Bank of America', date: 'July 22', time: '5:00 PM', location: 'Bank of America HQ, Uptown Charlotte', tags: ['Finance', 'Banking', 'Networking'], description: 'Finance forum with BofA executives covering markets, strategy, and careers.', rsvpCount: 94, lng: -80.8431, lat: 35.2271 },
+    { id: 'cha2', title: 'Truist Intern Leadership Day', company: 'Truist', date: 'Aug 5', time: '9:00 AM', location: 'Truist HQ, Uptown Charlotte', tags: ['Finance', 'Leadership', 'Development'], description: 'Leadership development day with Truist C-suite executives.', rsvpCount: 61, lng: -80.8431, lat: 35.2271 },
+  ],
+  Nashville: [
+    { id: 'nas1', title: 'HCA Healthcare Intern Medical Forum', company: 'HCA Healthcare', date: 'July 28', time: '3:00 PM', location: 'HCA HQ, Downtown Nashville', tags: ['Healthcare', 'Panel', 'Networking'], description: 'Healthcare industry panels with HCA executives and medical directors.', rsvpCount: 55, lng: -86.7816, lat: 36.1627 },
+    { id: 'nas2', title: 'Amazon Nashville Intern Social', company: 'Amazon', date: 'Aug 4', time: '6:00 PM', location: 'Nashville Yards', tags: ['Tech', 'Social', 'Networking'], description: 'Intern social at Amazon\'s Nashville operations campus.', rsvpCount: 48, lng: -86.7984, lat: 36.1530 },
+  ],
+  Phoenix: [
+    { id: 'phx1', title: 'Intel Chandler Intern Chip Tour', company: 'Intel', date: 'July 25', time: '9:00 AM', location: 'Intel Chandler Campus', tags: ['Engineering', 'Semiconductor', 'Tour'], description: 'Rare access to Intel\'s semiconductor fabrication facilities.', rsvpCount: 72, lng: -111.8413, lat: 33.3062 },
+    { id: 'phx2', title: 'GoDaddy Intern Hackathon', company: 'GoDaddy', date: 'Aug 2', time: '9:00 AM', location: 'GoDaddy HQ, Scottsdale', tags: ['Tech', 'Hackathon', 'Prizes'], description: 'Build the future of small business tech at GoDaddy\'s hackathon.', rsvpCount: 58, lng: -111.9261, lat: 33.4942 },
+  ],
+  Raleigh: [
+    { id: 'ral1', title: 'Red Hat Intern Open Source Summit', company: 'Red Hat', date: 'July 24', time: '10:00 AM', location: 'Red Hat HQ, Downtown Raleigh', tags: ['Tech', 'Open Source', 'Engineering'], description: 'Open source development summit with Red Hat engineers and contributors.', rsvpCount: 64, lng: -78.6382, lat: 35.7796 },
+    { id: 'ral2', title: 'Epic Games Intern Game Jam', company: 'Epic Games', date: 'Aug 1', time: '9:00 AM', location: 'Epic Games HQ, Cary', tags: ['Gaming', 'Hackathon', 'Creative'], description: '48-hour game jam using Unreal Engine with Epic Games mentors.', rsvpCount: 89, lng: -78.7811, lat: 35.7915 },
+  ],
 };
