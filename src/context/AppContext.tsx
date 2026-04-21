@@ -12,11 +12,25 @@ interface HotspotChat {
   msgs: { s: string; t: string; self: boolean; time: string }[];
 }
 
+interface UserAvatar {
+  url: string;
+  style: string;
+  seed: string;
+  company: string;
+  companyColor: string;
+  companyEmoji: string;
+  companyAttire: string;
+}
+
 interface AppContextType {
   rsvped: Set<string>;
   addRsvp: (id: string) => void;
   hotspotChats: HotspotChat[];
   addHotspotChat: (chat: HotspotChat) => void;
+  userAvatar: UserAvatar | null;
+  setUserAvatar: (avatar: UserAvatar) => void;
+  userName: string;
+  setUserName: (name: string) => void;
 }
 
 const AppContext = createContext<AppContextType>({
@@ -24,11 +38,17 @@ const AppContext = createContext<AppContextType>({
   addRsvp: () => {},
   hotspotChats: [],
   addHotspotChat: () => {},
+  userAvatar: null,
+  setUserAvatar: () => {},
+  userName: '',
+  setUserName: () => {},
 });
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [rsvped, setRsvped] = useState<Set<string>>(new Set());
   const [hotspotChats, setHotspotChats] = useState<HotspotChat[]>([]);
+  const [userAvatar, setUserAvatar] = useState<UserAvatar | null>(null);
+  const [userName, setUserName] = useState('');
 
   const addRsvp = (id: string) => {
     setRsvped(prev => { const n = new Set(prev); n.add(id); return n; });
@@ -42,7 +62,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AppContext.Provider value={{ rsvped, addRsvp, hotspotChats, addHotspotChat }}>
+    <AppContext.Provider value={{ rsvped, addRsvp, hotspotChats, addHotspotChat, userAvatar, setUserAvatar, userName, setUserName }}>
       {children}
     </AppContext.Provider>
   );

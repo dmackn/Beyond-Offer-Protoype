@@ -139,9 +139,8 @@ const CITY_PODS: Record<string, PodData[]> = {
     { name: 'Century City / Westwood', count: 14, cos: ['CAA HQ', 'Fox Corp', 'WME', 'UTA'], color: '#DC2626', lng: -118.4165, lat: 34.0522 },
     { name: 'Manhattan Beach', count: 10, cos: ['Chevron LA', 'Skechers HQ', 'DraftKings LA'], color: '#7C3AED', lng: -118.4195, lat: 33.8847 },
   ],
-  // New cities
   Miami: [
-    { name: 'Brickell / Financial District', count: 24, cos: ['Citadel HQ', 'BlackRock Miami', 'JPMorgan Miami', 'Softbank LA'], color: '#4F46E5', lng: -80.1918, lat: 25.7617 },
+    { name: 'Brickell / Financial District', count: 24, cos: ['Citadel HQ', 'BlackRock Miami', 'JPMorgan Miami'], color: '#4F46E5', lng: -80.1918, lat: 25.7617 },
     { name: 'Wynwood / Midtown', count: 18, cos: ['Microsoft Miami', 'Google Miami', 'Spotify Miami'], color: '#0D9488', lng: -80.1993, lat: 25.8026 },
     { name: 'Miami Beach / South Beach', count: 12, cos: ['WeWork', 'Twitter Miami', 'Founders Fund'], color: '#DC2626', lng: -80.1300, lat: 25.7907 },
     { name: 'Doral / Airport Area', count: 10, cos: ['Carnival Corp HQ', 'Lennar HQ', 'World Fuel Services'], color: '#7C3AED', lng: -80.3544, lat: 25.8154 },
@@ -149,28 +148,28 @@ const CITY_PODS: Record<string, PodData[]> = {
   Dallas: [
     { name: 'Uptown / Victory Park', count: 28, cos: ['AT&T HQ', 'Goldman Sachs Dallas', 'JPMorgan Dallas'], color: '#4F46E5', lng: -96.8063, lat: 32.7948 },
     { name: 'Las Colinas / Irving', count: 22, cos: ['ExxonMobil HQ', 'Celanese HQ', 'Fluor HQ'], color: '#DC2626', lng: -97.0036, lat: 32.8776 },
-    { name: 'Plano / North Dallas', count: 30, cos: ['Toyota NA HQ', 'JPMorgan Chase Ops', 'FedEx Ground HQ', 'Capital One Dallas'], color: '#0D9488', lng: -96.6989, lat: 33.0198 },
-    { name: 'Frisco / Allen', count: 16, cos: ['Liberty Mutual Dallas', 'Keurig Dr Pepper HQ', 'Stonebriar'], color: '#7C3AED', lng: -96.8219, lat: 33.1507 },
-    { name: 'Downtown Dallas', count: 20, cos: ['Bank of America Dallas', 'PwC Dallas', 'Deloitte Dallas', 'American Airlines HQ'], color: '#B45309', lng: -96.7970, lat: 32.7767 },
+    { name: 'Plano / North Dallas', count: 30, cos: ['Toyota NA HQ', 'JPMorgan Chase Ops', 'FedEx Ground HQ'], color: '#0D9488', lng: -96.6989, lat: 33.0198 },
+    { name: 'Frisco / Allen', count: 16, cos: ['Liberty Mutual Dallas', 'Keurig Dr Pepper HQ'], color: '#7C3AED', lng: -96.8219, lat: 33.1507 },
+    { name: 'Downtown Dallas', count: 20, cos: ['Bank of America Dallas', 'PwC Dallas', 'Deloitte Dallas'], color: '#B45309', lng: -96.7970, lat: 32.7767 },
     { name: 'Fort Worth', count: 14, cos: ['American Airlines HQ (DFW)', 'BNSF Railway HQ', 'D.R. Horton HQ'], color: '#059669', lng: -97.3308, lat: 32.7555 },
   ],
   Denver: [
     { name: 'LoDo / Downtown Denver', count: 20, cos: ['Google Denver', 'Salesforce Denver', 'Arrow Electronics HQ'], color: '#4F46E5', lng: -104.9903, lat: 39.7392 },
     { name: 'RiNo / Five Points', count: 14, cos: ['Slack Denver', 'Workday Denver', 'SendGrid HQ'], color: '#0D9488', lng: -104.9719, lat: 39.7644 },
     { name: 'Tech Center / Greenwood Village', count: 18, cos: ['Oracle Denver', 'DISH Network HQ', 'Lockheed Martin Denver'], color: '#DC2626', lng: -104.8897, lat: 39.6128 },
-    { name: 'Boulder', count: 16, cos: ['Google Boulder', 'Salesforce Boulder', 'Rally Software', 'Zayo Group HQ'], color: '#7C3AED', lng: -105.2705, lat: 40.0150 },
+    { name: 'Boulder', count: 16, cos: ['Google Boulder', 'Salesforce Boulder', 'Rally Software'], color: '#7C3AED', lng: -105.2705, lat: 40.0150 },
   ],
   DC: [
     { name: 'Downtown DC / K Street', count: 28, cos: ['Booz Allen Hamilton HQ', 'Deloitte DC', 'McKinsey DC', 'SAIC HQ'], color: '#4F46E5', lng: -77.0369, lat: 38.9072 },
-    { name: 'Tysons Corner / McLean', count: 24, cos: ['Freddie Mac HQ', 'Capital One HQ', 'Leidos HQ', 'DXC Technology'], color: '#DC2626', lng: -77.2311, lat: 38.9187 },
-    { name: 'Arlington / Rosslyn', count: 20, cos: ['Amazon HQ2', 'Boeing HQ', 'Nestle USA HQ', 'Lidl US HQ'], color: '#0D9488', lng: -77.0841, lat: 38.8816 },
-    { name: 'Reston / Herndon', count: 16, cos: ['Leidos HQ', 'DXC Technology', 'Neustar HQ', 'Volkswagen Group of America'], color: '#7C3AED', lng: -77.3564, lat: 38.9687 },
+    { name: 'Tysons Corner / McLean', count: 24, cos: ['Freddie Mac HQ', 'Capital One HQ', 'Leidos HQ'], color: '#DC2626', lng: -77.2311, lat: 38.9187 },
+    { name: 'Arlington / Rosslyn', count: 20, cos: ['Amazon HQ2', 'Boeing HQ', 'Nestle USA HQ'], color: '#0D9488', lng: -77.0841, lat: 38.8816 },
+    { name: 'Reston / Herndon', count: 16, cos: ['Leidos HQ', 'DXC Technology', 'Neustar HQ'], color: '#7C3AED', lng: -77.3564, lat: 38.9687 },
     { name: 'Bethesda / Chevy Chase', count: 12, cos: ['Marriott HQ', 'Host Hotels HQ', 'Lockheed Martin Corp HQ'], color: '#B45309', lng: -77.1006, lat: 38.9807 },
   ],
   Houston: [
-    { name: 'Energy Corridor', count: 24, cos: ['Shell USA HQ', 'BP America HQ', 'ConocoPhillips HQ', 'Sysco HQ'], color: '#4F46E5', lng: -95.6315, lat: 29.7826 },
+    { name: 'Energy Corridor', count: 24, cos: ['Shell USA HQ', 'BP America HQ', 'ConocoPhillips HQ'], color: '#4F46E5', lng: -95.6315, lat: 29.7826 },
     { name: 'Greenway Plaza / Galleria', count: 18, cos: ['Chevron Houston', 'Halliburton HQ', 'Baker Hughes HQ'], color: '#DC2626', lng: -95.4739, lat: 29.7375 },
-    { name: 'Downtown Houston', count: 22, cos: ['JPMorgan Houston', 'Deloitte Houston', 'EY Houston', 'Waste Management HQ'], color: '#0D9488', lng: -95.3698, lat: 29.7604 },
+    { name: 'Downtown Houston', count: 22, cos: ['JPMorgan Houston', 'Deloitte Houston', 'EY Houston'], color: '#0D9488', lng: -95.3698, lat: 29.7604 },
     { name: 'The Woodlands', count: 14, cos: ['ExxonMobil HQ', 'Aon Houston', 'McKesson HQ'], color: '#7C3AED', lng: -95.5102, lat: 30.1658 },
   ],
   Minneapolis: [
@@ -199,7 +198,6 @@ const CITY_PODS: Record<string, PodData[]> = {
     { name: 'Durham / Chapel Hill', count: 14, cos: ['Duke University Ops', 'Quintiles HQ', 'GlaxoSmithKline RTP'], color: '#DC2626', lng: -78.8986, lat: 35.9940 },
     { name: 'Cary / Morrisville', count: 12, cos: ['SAS Institute', 'Bandwidth HQ', 'Epic Games HQ'], color: '#0D9488', lng: -78.7811, lat: 35.7915 },
   ],
-
   London: [
     { name: 'Canary Wharf', count: 44, cos: ['HSBC', 'Barclays', 'JPMorgan'], color: '#4F46E5', lng: -0.0235, lat: 51.5054 },
     { name: 'City of London', count: 38, cos: ['Goldman Sachs', 'Morgan Stanley', 'BlackRock'], color: '#DC2626', lng: -0.0922, lat: 51.5155 },
@@ -243,15 +241,15 @@ const CITY_PODS: Record<string, PodData[]> = {
   ],
 };
 
-const CITY_FRIENDS: Record<string, { name: string; init: string; color: string; lng: number; lat: number }[]> = {
+const CITY_FRIENDS: Record<string, { name: string; init: string; color: string; lng: number; lat: number; avatarUrl?: string }[]> = {
   Atlanta: [
-    { name: 'Aisha K.', init: 'AK', color: '#0D9488', lng: -84.3700, lat: 33.7750 },
-    { name: 'Marcus T.', init: 'MT', color: '#0D9488', lng: -84.3860, lat: 33.7830 },
-    { name: 'Priya S.', init: 'PS', color: '#7C3AED', lng: -84.3920, lat: 33.7780 },
+    { name: 'Aisha K.', init: 'AK', color: '#0D9488', lng: -84.3700, lat: 33.7750, avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Aisha&skinColor=8d5524&hairColor=1a1a1a&backgroundColor=0D9488&backgroundType=solid' },
+    { name: 'Marcus T.', init: 'MT', color: '#0D9488', lng: -84.3860, lat: 33.7830, avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Marcus&skinColor=3d1a08&hairColor=1a1a1a&backgroundColor=7C3AED&backgroundType=solid' },
+    { name: 'Priya S.', init: 'PS', color: '#7C3AED', lng: -84.3920, lat: 33.7780, avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Priya&skinColor=c68642&hairColor=1a1a1a&backgroundColor=4F46E5&backgroundType=solid' },
   ],
-  NYC: [{ name: 'Chris P.', init: 'CP', color: '#4F46E5', lng: -74.0050, lat: 40.7560 }],
-  SF: [{ name: 'Maya J.', init: 'MJ', color: '#4F46E5', lng: -122.4050, lat: 37.7800 }],
-  Seattle: [{ name: 'Kai N.', init: 'KN', color: '#4F46E5', lng: -122.3380, lat: 47.6270 }],
+  NYC: [{ name: 'Chris P.', init: 'CP', color: '#4F46E5', lng: -74.0050, lat: 40.7560, avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Chris&skinColor=f5cba7&hairColor=7B3F00&backgroundColor=4F46E5&backgroundType=solid' }],
+  SF: [{ name: 'Maya J.', init: 'MJ', color: '#4F46E5', lng: -122.4050, lat: 37.7800, avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Maya&skinColor=e8a87c&hairColor=1a1a1a&backgroundColor=0891B2&backgroundType=solid' }],
+  Seattle: [{ name: 'Kai N.', init: 'KN', color: '#4F46E5', lng: -122.3380, lat: 47.6270, avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Kai&skinColor=f5cba7&hairColor=C9A84C&backgroundColor=059669&backgroundType=solid' }],
   Chicago: [], Austin: [], Boston: [], LA: [],
   Miami: [], Dallas: [], Denver: [], DC: [], Houston: [],
   Minneapolis: [], Charlotte: [], Nashville: [], Phoenix: [], Raleigh: [],
@@ -292,9 +290,8 @@ export default function MapPage() {
   const [selectedHotspot, setSelectedHotspot] = useState<string | null>(null);
   const [selectedDropped, setSelectedDropped] = useState<DroppedHotspot | null>(null);
   const [mapReady, setMapReady] = useState(false);
-  const { rsvped, addRsvp, addHotspotChat } = useAppContext();
+  const { rsvped, addRsvp, addHotspotChat, userAvatar } = useAppContext();
 
-  // Drop hotspot form state
   const [showDropForm, setShowDropForm] = useState(false);
   const [hotspotName, setHotspotName] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
@@ -389,15 +386,40 @@ export default function MapPage() {
         markersRef.current.push(new mapboxgl.Marker({ element: el }).setLngLat([pod.lng, pod.lat]).addTo(map.current!));
       });
 
+      // Friends with avatars
       const friends = CITY_FRIENDS[selectedCity] || [];
       friends.forEach(f => {
         const el = document.createElement('div');
         el.style.cssText = `display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer`;
+        const inner = f.avatarUrl
+          ? `<img src="${f.avatarUrl}" style="width:34px;height:34px;border-radius:50%;object-fit:cover;" />`
+          : `<div style="width:34px;height:34px;border-radius:50%;background:${f.color};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;">${f.init}</div>`;
         el.innerHTML = `
-          <div style="width:34px;height:34px;border-radius:50%;background:${f.color};border:2.5px solid #22C55E;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.15)">${f.init}</div>
+          <div style="position:relative;width:34px;height:34px;">
+            ${inner}
+            <div style="position:absolute;inset:0;border-radius:50%;border:2.5px solid #22C55E;pointer-events:none;"></div>
+          </div>
           <div style="background:#fff;border-radius:50px;padding:1px 7px;font-size:9px;font-weight:600;color:#111;box-shadow:0 1px 4px rgba(0,0,0,0.1);white-space:nowrap">${f.name.split(' ')[0]}</div>`;
         markersRef.current.push(new mapboxgl.Marker({ element: el }).setLngLat([f.lng, f.lat]).addTo(map.current!));
       });
+
+      // Show user's own avatar on map
+      if (userAvatar) {
+        const el = document.createElement('div');
+        el.style.cssText = `display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer`;
+        el.innerHTML = `
+          <div style="position:relative;width:40px;height:40px;">
+            <img src="${userAvatar.url}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
+            <div style="position:absolute;inset:0;border-radius:50%;border:3px solid #22C55E;pointer-events:none;"></div>
+            <div style="position:absolute;bottom:-1px;right:-1px;width:13px;height:13px;border-radius:50%;background:#22C55E;border:2px solid #fff;"></div>
+          </div>
+          <div style="background:#111;color:#fff;border-radius:50px;padding:2px 8px;font-size:9px;font-weight:700;white-space:nowrap">You</div>`;
+        markersRef.current.push(
+          new mapboxgl.Marker({ element: el })
+            .setLngLat([center[0] + 0.003, center[1] - 0.002])
+            .addTo(map.current!)
+        );
+      }
     }
 
     if (mode === 'explore') {
@@ -434,7 +456,7 @@ export default function MapPage() {
         markersRef.current.push(new mapboxgl.Marker({ element: el }).setLngLat(hs.coords).addTo(map.current!));
       });
     }
-  }, [mode, mapReady, selectedCity, droppedHotspots]);
+  }, [mode, mapReady, selectedCity, droppedHotspots, userAvatar]);
 
   const searchPlaces = async (query: string) => {
     if (!query.trim() || query.length < 3) { setSearchResults([]); return; }
@@ -561,7 +583,6 @@ export default function MapPage() {
           {showDropForm && (
             <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', damping: 25 }}
               style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 50, background: '#fff', borderRadius: '20px 20px 0 0', padding: '20px', maxHeight: '88%', overflowY: 'auto', boxShadow: '0 -4px 24px rgba(0,0,0,0.1)' }}>
-
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                 <div style={{ fontSize: '17px', fontWeight: '700', color: '#111' }}>Drop a Hotspot</div>
                 <button onClick={() => { setShowDropForm(false); resetDropForm(); }}
@@ -569,8 +590,6 @@ export default function MapPage() {
                   <X style={{ width: '16px', height: '16px', color: '#111' }} />
                 </button>
               </div>
-
-              {/* Place search */}
               <div style={{ marginBottom: '12px' }}>
                 <label style={{ fontSize: '13px', fontWeight: '600', color: '#111', display: 'block', marginBottom: '6px' }}>📍 Place</label>
                 <input value={hotspotName}
@@ -579,7 +598,6 @@ export default function MapPage() {
                   style={{ width: '100%', height: '44px', border: '1.5px solid #E5E5E5', borderRadius: '12px', padding: '0 14px', fontSize: '14px', color: '#111', outline: 'none', fontFamily: 'Inter, system-ui, sans-serif' }}
                   autoFocus />
               </div>
-
               {searchResults.length > 0 && (
                 <div style={{ border: '1px solid #F0F0F0', borderRadius: '12px', overflow: 'hidden', marginBottom: '12px' }}>
                   {searchResults.map((result, i) => (
@@ -594,7 +612,6 @@ export default function MapPage() {
                   ))}
                 </div>
               )}
-
               {selectedPlace && (
                 <div style={{ background: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: '10px', padding: '10px 14px', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span style={{ fontSize: '16px' }}>✓</span>
@@ -604,8 +621,6 @@ export default function MapPage() {
                   </div>
                 </div>
               )}
-
-              {/* Status */}
               <div style={{ marginBottom: '12px' }}>
                 <label style={{ fontSize: '13px', fontWeight: '600', color: '#111', display: 'block', marginBottom: '8px' }}>🔴 Status</label>
                 <div style={{ display: 'flex', gap: '8px' }}>
@@ -619,8 +634,6 @@ export default function MapPage() {
                   </button>
                 </div>
               </div>
-
-              {/* Time picker — only if later */}
               {!hotspotLive && (
                 <div style={{ marginBottom: '12px' }}>
                   <label style={{ fontSize: '13px', fontWeight: '600', color: '#111', display: 'block', marginBottom: '6px' }}>🕐 What time?</label>
@@ -628,8 +641,6 @@ export default function MapPage() {
                     style={{ width: '100%', height: '44px', border: '1.5px solid #E5E5E5', borderRadius: '12px', padding: '0 14px', fontSize: '14px', color: '#111', outline: 'none', fontFamily: 'Inter, system-ui, sans-serif' }} />
                 </div>
               )}
-
-              {/* Vibe tags */}
               <div style={{ marginBottom: '12px' }}>
                 <label style={{ fontSize: '13px', fontWeight: '600', color: '#111', display: 'block', marginBottom: '8px' }}>✨ Vibe</label>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -641,8 +652,6 @@ export default function MapPage() {
                   ))}
                 </div>
               </div>
-
-              {/* Attire */}
               <div style={{ marginBottom: '12px' }}>
                 <label style={{ fontSize: '13px', fontWeight: '600', color: '#111', display: 'block', marginBottom: '6px' }}>
                   👗 Attire <span style={{ fontWeight: '400', color: '#999' }}>(optional)</span>
@@ -659,8 +668,6 @@ export default function MapPage() {
                   placeholder="Or type your own... e.g. Bowling shoes, all black..."
                   style={{ width: '100%', height: '40px', border: '1.5px solid #E5E5E5', borderRadius: '10px', padding: '0 12px', fontSize: '13px', color: '#111', outline: 'none', fontFamily: 'Inter, system-ui, sans-serif' }} />
               </div>
-
-              {/* Note */}
               <div style={{ marginBottom: '12px' }}>
                 <label style={{ fontSize: '13px', fontWeight: '600', color: '#111', display: 'block', marginBottom: '6px' }}>
                   💬 Note <span style={{ fontWeight: '400', color: '#999' }}>(optional)</span>
@@ -670,8 +677,6 @@ export default function MapPage() {
                   rows={2}
                   style={{ width: '100%', border: '1.5px solid #E5E5E5', borderRadius: '12px', padding: '10px 14px', fontSize: '13px', color: '#111', outline: 'none', fontFamily: 'Inter, system-ui, sans-serif', resize: 'none', lineHeight: '1.5' }} />
               </div>
-
-              {/* Group chat toggle */}
               <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 14px', background: '#F9F9F9', borderRadius: '12px', cursor: 'pointer' }} onClick={() => setHotspotGroupChat(p => !p)}>
                 <div>
                   <div style={{ fontSize: '13px', fontWeight: '600', color: '#111' }}>💬 Create a group chat</div>
@@ -681,7 +686,6 @@ export default function MapPage() {
                   <div style={{ position: 'absolute', top: '3px', left: hotspotGroupChat ? '21px' : '3px', width: '20px', height: '20px', borderRadius: '50%', background: '#fff', transition: 'all 0.2s', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
                 </div>
               </div>
-
               <button onClick={handleDropHotspot} disabled={!selectedPlace}
                 style={{ width: '100%', height: '48px', borderRadius: '12px', background: selectedPlace ? '#111' : '#E5E5E5', color: selectedPlace ? '#fff' : '#999', border: 'none', cursor: selectedPlace ? 'pointer' : 'not-allowed', fontSize: '15px', fontWeight: '700', transition: 'all 0.2s' }}>
                 {selectedPlace ? `${hotspotLive ? '🟢 Drop Live —' : '📅 Drop —'} ${selectedPlace.name}` : 'Search for a place first'}
@@ -709,7 +713,6 @@ export default function MapPage() {
                   <X style={{ width: '16px', height: '16px', color: '#111' }} />
                 </button>
               </div>
-
               {selectedDropped.vibes.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '12px' }}>
                   {selectedDropped.vibes.map(v => (
@@ -717,7 +720,6 @@ export default function MapPage() {
                   ))}
                 </div>
               )}
-
               {selectedDropped.attire && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#FEF3C7', borderRadius: '10px', padding: '10px 12px', marginBottom: '12px' }}>
                   <span style={{ fontSize: '16px' }}>👗</span>
@@ -727,17 +729,14 @@ export default function MapPage() {
                   </div>
                 </div>
               )}
-
               {selectedDropped.note && (
                 <div style={{ background: '#F9F9F9', borderRadius: '10px', padding: '10px 12px', marginBottom: '12px' }}>
                   <div style={{ fontSize: '11px', color: '#999', marginBottom: '3px' }}>Note from host</div>
                   <div style={{ fontSize: '13px', color: '#111', lineHeight: '1.5' }}>{selectedDropped.note}</div>
                 </div>
               )}
-
               <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
-                <button
-                  style={{ flex: 1, height: '46px', borderRadius: '12px', background: '#111', color: '#fff', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: '700' }}>
+                <button style={{ flex: 1, height: '46px', borderRadius: '12px', background: '#111', color: '#fff', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: '700' }}>
                   ✓ I'm going
                 </button>
                 {selectedDropped.groupChat && (
