@@ -10,7 +10,7 @@ export default function ProfilePage() {
 
   const displayName = userName || 'Your Name';
   const initials = displayName.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase();
-  const company = userAvatar?.company && userAvatar.company !== 'None' ? userAvatar.company : 'Summer Intern 2025';
+  const company = userAvatar?.company && userAvatar.company !== 'None' ? userAvatar.company : 'Summer Intern';
 
   return (
     <AppLayout>
